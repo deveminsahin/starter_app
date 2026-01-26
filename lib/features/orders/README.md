@@ -30,7 +30,7 @@ lib/features/orders/
 
 ```dart
 // Navigate to orders (requires authentication)
-context.go(const OrdersRoute().location);
+const OrdersRoute().go(context);
 ```
 
 ## Route Protection
