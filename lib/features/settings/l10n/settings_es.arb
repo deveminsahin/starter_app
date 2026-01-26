@@ -1,0 +1,12 @@
+{
+    "@@locale": "es",
+    "appBarTitle": "Configuración",
+    "languageSectionTitle": "Idioma",
+    "languageEnglish": "Inglés",
+    "languageSpanish": "Español",
+    "themeSectionTitle": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema",
+    "logOut":"Cerrar sesión"
+}

@@ -1,0 +1,39 @@
+{
+    "@@locale": "en",
+    "appBarTitle": "Settings",
+    "@appBarTitle": {
+        "description": "Title shown in the settings page app bar"
+    },
+    "languageSectionTitle": "Language",
+    "@languageSectionTitle": {
+        "description": "Section title for language selection options"
+    },
+    "languageEnglish": "English",
+    "@languageEnglish": {
+        "description": "Label for the English language option button"
+    },
+    "languageSpanish": "Spanish",
+    "@languageSpanish": {
+        "description": "Label for the Spanish language option button"
+    },
+    "themeSectionTitle": "Theme",
+    "@themeSectionTitle": {
+        "description": "Section title for theme selection options"
+    },
+    "themeLight": "Light",
+    "@themeLight": {
+        "description": "Label for the light theme option button"
+    },
+    "themeDark": "Dark",
+    "@themeDark": {
+        "description": "Label for the dark theme option button"
+    },
+    "themeSystem": "System",
+    "@themeSystem": {
+        "description": "Label for the system theme option button"
+    },
+    "logOut": "Log out",
+    "@logOut": {
+        "description": "Label for the logout button"
+    }
+}
