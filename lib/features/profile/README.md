@@ -6,11 +6,26 @@ User profile management for the starter app.
 
 ```
 lib/features/profile/
-├── domain/           # Entities, value objects, repository interfaces
-├── application/      # Use cases (GetProfile query)
-├── infrastructure/   # Repository impl, data sources, models
-├── presentation/     # BLoC, pages, widgets
-└── l10n/             # Feature-specific localization
+├── domain/
+│   ├── entities/          # UserProfile, ProfileId
+│   ├── events/            # ProfileDomainEvent
+│   ├── failure/           # ProfileFailure, ProfileExceptionMapper
+│   └── repositories/      # IUserProfileRepository
+├── application/
+│   └── usecases/          # GetProfile query
+├── infrastructure/
+│   ├── datasources/       # UserProfileRemoteDataSource
+│   ├── mappers/           # ProfileExceptionMapper impl
+│   ├── models/            # UserProfileModel
+│   └── repositories/      # UserProfileRepositoryImpl
+├── presentation/
+│   ├── bloc/              # ProfileBloc, ProfileEvent, ProfileState
+│   ├── failure_message/   # ProfileFailureMapper
+│   ├── pages/             # ProfilePage
+│   ├── routes/            # ProfileRoute (TypedGoRoute)
+│   └── widgets/           # LoginButton, ProfileContent
+├── l10n/                  # Feature-scoped localizations
+└── profile.dart           # Barrel export
 ```
 
 ## Key Components
@@ -33,8 +48,9 @@ lib/features/profile/
 ### Presentation Layer
 - **ProfileBloc** - Listens to auth events via `IEventDispatcher`
 - **ProfileFailureMapper** - Maps failures to localized user messages
-- **ProfilePage** - Displays profile or login button
-- **ProfileContent** - Isolated widget for profile details
+- **ProfilePage** - Displays profile or login button based on auth state
+- **ProfileContent** - Isolated widget for displaying profile details
+- **LoginButton** - Navigation widget shown when unauthenticated
 
 ## Key Patterns
 
@@ -63,4 +79,5 @@ switch (event) {
 very_good test --no-optimization test/features/profile/
 ```
 
-73 tests covering all layers.
+87 tests covering all layers.
+
