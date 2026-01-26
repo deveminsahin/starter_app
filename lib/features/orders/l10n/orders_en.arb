@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "appBarTitle": "Orders",
+    "@appBarTitle": {
+        "description": "Title shown in the orders page app bar"
+    },
+    "body": "Deeplink protected route",
+    "@body": {
+        "description": "Placeholder text shown in the orders page body indicating this is a protected route"
+    }
+}
