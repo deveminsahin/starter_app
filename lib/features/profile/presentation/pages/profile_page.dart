@@ -15,7 +15,6 @@ final class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  @override
   Widget build(BuildContext context) {
     final l10n = context.profileL10n;
     return Scaffold(
@@ -34,7 +33,7 @@ final class ProfilePage extends StatelessWidget {
   }
 }
 
-class _ProfileView extends StatelessWidget {
+final class _ProfileView extends StatelessWidget {
   const _ProfileView();
 
   @override
