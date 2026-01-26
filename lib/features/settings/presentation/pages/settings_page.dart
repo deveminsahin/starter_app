@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter_app/core/constants/constants.dart';
-
 import 'package:starter_app/core/presentation/responsive/responsive.dart';
-import 'package:starter_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:starter_app/features/auth/presentation/bloc/auth_event.dart';
-import 'package:starter_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:starter_app/features/settings/l10n/l10n_extensions.dart';
 import 'package:starter_app/features/settings/presentation/widgets/language_selector.dart';
+import 'package:starter_app/features/settings/presentation/widgets/logout_button.dart';
 import 'package:starter_app/features/settings/presentation/widgets/theme_selector.dart';
 
-/// Settings page - placeholder for settings feature.
+/// Settings page with theme, language, and logout functionality.
 ///
-/// This is a temporary placeholder that will be replaced with
-/// the full settings implementation in a future feature development.
+/// Displays user settings for:
+/// - Language selection (English/Spanish)
+/// - Theme selection (Light/Dark/System)
+/// - Logout button (only when authenticated)
 final class SettingsPage extends StatelessWidget {
+  /// Creates a settings page.
   const SettingsPage({super.key});
 
   @override
@@ -24,36 +23,7 @@ final class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appBarTitle)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          if (state is! Authenticated) return const SizedBox.shrink();
-          return ResponsivePadding(
-            mobilePadding: const EdgeInsets.symmetric(
-              horizontal: PaddingConstants.medium,
-              vertical: PaddingConstants.medium,
-            ),
-            tabletPadding: const EdgeInsets.symmetric(
-              horizontal: PaddingConstants.large,
-              vertical: PaddingConstants.medium,
-            ),
-            desktopPadding: const EdgeInsets.symmetric(
-              horizontal: PaddingConstants.xLarge,
-              vertical: PaddingConstants.medium,
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size.infinite,
-              ),
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                  const AuthEvent.logoutRequested(),
-                );
-              },
-              child: Text(l10n.logOut),
-            ),
-          );
-        },
-      ),
+      floatingActionButton: const LogoutButton(),
       body: const ResponsiveContainer(
         child: ResponsivePadding(
           child: Column(
@@ -61,9 +31,7 @@ final class SettingsPage extends StatelessWidget {
             children: [
               // Language Section
               LanguageSelector(),
-              ResponsiveVerticalGap(
-                height: PaddingConstants.xLarge,
-              ),
+              SpacingWidgets.verticalXl,
               // Theme Section
               ThemeSelector(),
               // Add bottom padding to prevent content from
