@@ -63,14 +63,16 @@ Failures are strongly typed (`ProfileFailure`) and mapped from exceptions in the
 The `ProfileBloc` subscribes to `AuthDomainEvent` stream:
 
 ```dart
-switch (event) {
-  case UserRegistered():
-  case UserLoggedIn():
-  case UserSessionRestored():
-    add(ProfileEvent.getMyProfile());
-  case UserLoggedOut():
-    add(ProfileEvent.reset());
-}
+_eventDispatcher.on<AuthDomainEvent>().listen((event) {
+  final profileEvent = switch (event) {
+    UserRegistered() ||
+    UserLoggedIn() ||
+    UserSessionRestored() => const ProfileEvent.getMyProfile(),
+    UserLoggedOut() => const ProfileEvent.reset(),
+  };
+
+  add(profileEvent);
+});
 ```
 
 ## Tests
