@@ -16,7 +16,7 @@ An **AI-ready**, enterprise-grade Flutter starter app built with **Clean Archite
 | Feature | Description |
 |---------|-------------|
 | 🤖 **AI-Ready Architecture** | 23 architecture rules for AI-assisted development |
-| 🧪 **100% Test Coverage** | 2,064 tests across all layers |
+| 🧪 **100% Test Coverage** | Comprehensive tests across all layers |
 | 🏗️ **CQRS Pattern** | Separate Commands (write) and Queries (read) |
 | 🔐 **Type-Safe Routing** | go_router_builder with compile-time route safety |
 | ⚙️ **Environment Config** | `--dart-define-from-file` for secure configuration |
@@ -193,7 +193,7 @@ class AuthRoute extends BaseRoute with $AuthRoute {
 
 ## 🧪 Testing
 
-**100% test coverage** with 2,064 tests. Uses Very Good CLI for proper coverage reporting.
+**100% test coverage** with comprehensive tests across all layers. Uses Very Good CLI for proper coverage reporting.
 
 ```bash
 # Run all tests with coverage

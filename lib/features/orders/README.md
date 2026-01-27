@@ -64,7 +64,7 @@ Text(l10n.appBarTitle);  // "Orders" or "Pedidos"
 ## Tests
 
 ```bash
-flutter test test/features/orders/
+very_good test test/features/orders/
 ```
 
 | Test File | Coverage |

@@ -20,7 +20,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 
 ### Prerequisites
 
-- Flutter 3.38.6+ (stable channel)
+- Flutter 3.38.7+ (stable channel)
 - Dart SDK 3.5+
 - IDE: VS Code (recommended) or Android Studio
 

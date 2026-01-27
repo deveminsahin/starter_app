@@ -35,7 +35,7 @@ lib/features/settings/
 
 ```dart
 // Navigate to settings
-context.go(const SettingsRoute().location);
+const SettingsRoute().go(context);
 
 // Theme switching
 context.read<ThemeCubit>().setDarkTheme();
@@ -59,7 +59,7 @@ Text(l10n.appBarTitle);  // "Settings" or "Configuración"
 ## Tests
 
 ```bash
-flutter test test/features/settings/
+very_good test test/features/settings/
 ```
 
 | Test File | Coverage |
