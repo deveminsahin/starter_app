@@ -2,7 +2,7 @@
 ///
 /// This exception is thrown by remote data sources when API calls fail.
 /// It should be caught in the repository layer
-/// and converted to a ServerFailure.
+/// and converted to an InfrastructureFailure.server.
 ///
 /// Example:
 /// ```dart
@@ -19,7 +19,7 @@
 ///   final data = await _remoteDataSource.getData();
 ///   return Right(data.toDomain());
 /// } on ServerException catch (e) {
-///   return Left(Failure.server(
+///   return Left(InfrastructureFailure.server(
 ///     message: e.message,
 ///     statusCode: e.statusCode,
 ///   ));

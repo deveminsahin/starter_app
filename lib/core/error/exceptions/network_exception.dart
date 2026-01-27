@@ -3,7 +3,7 @@
 /// This exception is thrown when there's no internet connection or
 /// network-related errors occur during API calls.
 /// It should be caught in the repository layer
-/// and converted to a NetworkFailure.
+/// and converted to an InfrastructureFailure.network.
 ///
 /// Note: You can also catch dart:io's SocketException
 /// directly in repositories.
@@ -22,11 +22,11 @@
 ///   final data = await _remoteDataSource.getData();
 ///   return Right(data.toDomain());
 /// } on NetworkException catch (e) {
-///   return Left(Failure.network(
+///   return Left(InfrastructureFailure.network(
 ///     message: e.message,
 ///   ));
 /// } on SocketException catch (_) {
-///   return Left(const Failure.network(
+///   return Left(const InfrastructureFailure.network(
 ///     message: 'No internet connection',
 ///   ));
 /// }

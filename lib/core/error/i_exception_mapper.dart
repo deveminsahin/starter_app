@@ -15,11 +15,11 @@ import 'package:starter_app/core/infrastructure/base_repository.dart';
 /// Example implementation:
 /// ```dart
 /// @injectable
-/// class AuthFailureMapper implements IFailureMapper {
-///   const AuthFailureMapper();
+/// class AuthExceptionMapper implements IExceptionMapper {
+///   const AuthExceptionMapper();
 ///
 ///   @override
-///   Failure mapToFailure(ServerException exception) {
+///   TechnicalFailure mapToFailure(ServerException exception) {
 ///     return switch (exception.statusCode) {
 ///       HttpStatus.unauthorized => AuthFailure.unauthorized(
 ///           message: exception.message,

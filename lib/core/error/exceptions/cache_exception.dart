@@ -3,7 +3,7 @@
 /// This exception is thrown by local data sources when cache operations fail
 /// (e.g., database queries, SharedPreferences, file operations).
 /// It should be caught in the repository layer
-/// and converted to a CacheFailure.
+/// and converted to an InfrastructureFailure.cache.
 ///
 /// Example:
 /// ```dart
@@ -22,7 +22,7 @@
 ///   await _localDataSource.cacheData(data);
 ///   return const Right(unit);
 /// } on CacheException catch (e) {
-///   return Left(Failure.cache(message: e.message));
+///   return Left(InfrastructureFailure.cache(message: e.message));
 /// }
 /// ```
 final class CacheException implements Exception {
