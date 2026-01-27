@@ -51,12 +51,27 @@ class SensitiveDataFilter implements IDataFilter {
       } else if (entry.value is Map<String, dynamic>) {
         // Recursively filter nested maps
         filtered[entry.key] = filter(entry.value as Map<String, dynamic>);
+      } else if (entry.value is List) {
+        // Recursively filter lists that may contain maps
+        filtered[entry.key] = _filterList(entry.value as List<dynamic>);
       } else {
         filtered[entry.key] = entry.value;
       }
     }
 
     return filtered;
+  }
+
+  /// Recursively filters a list, handling nested maps and lists.
+  List<dynamic> _filterList(List<dynamic> list) {
+    return list.map((item) {
+      if (item is Map<String, dynamic>) {
+        return filter(item);
+      } else if (item is List) {
+        return _filterList(item);
+      }
+      return item;
+    }).toList();
   }
 
   @override
