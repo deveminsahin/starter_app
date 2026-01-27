@@ -132,11 +132,15 @@ final class SentryErrorReporter implements IErrorReporter {
 
   /// Creates a [SentryUser] from domain [User].
   ///
-  /// Visible for testing to ensure user data extraction is covered.
+  /// Uses safe value extraction to avoid crashes during error reporting.
+  /// Falls back to 'unknown' if email is invalid.
   SentryUser _createSentryUser(User user) {
     return SentryUser(
       id: user.id.value.value,
-      email: user.email.getOrCrash(),
+      email: user.email.value.fold(
+        (_) => 'unknown', // Graceful fallback for invalid email
+        (email) => email,
+      ),
     );
   }
 
