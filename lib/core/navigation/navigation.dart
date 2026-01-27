@@ -15,7 +15,6 @@
 /// - `BaseRoute`: Abstract base for routes with custom transitions
 /// - `PageBuilder`: Interface for custom page transitions
 /// - `AppRouterObserver`: Navigation debugging and logging
-/// - `AdaptiveNavigationScaffold`: Adaptive navigation shell
 ///
 /// ## Usage Example
 ///

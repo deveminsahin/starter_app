@@ -161,9 +161,9 @@ Console output:
 🚦 Navigation: STOP_GESTURE
 ```
 
-#### 6. **AdaptiveNavigationScaffold** (`adaptive_navigation_scaffold.dart`)
+#### 6. **AdaptiveNavigationScaffold** (`core/presentation/widgets/adaptive_navigation_scaffold.dart`)
 
-Adaptive navigation shell based on screen size:
+Adaptive navigation shell based on screen size (located in presentation layer):
 
 | Screen Size | Navigation Pattern | Behavior |
 |-------------|-------------------|----------|
@@ -463,7 +463,7 @@ ProductDetailRoute('123').push(context);
 - `lib/core/navigation/base_route.dart` - Base route class
 - `lib/core/navigation/page_builder.dart` - Transition builders
 - `lib/core/navigation/app_router_observer.dart` - Navigation debugging
-- `lib/core/navigation/adaptive_navigation_scaffold.dart` - Adaptive shell
+- `lib/core/presentation/widgets/adaptive_navigation_scaffold.dart` - Adaptive shell
 
 ### Feature Route Files (part of app_router.dart)
 

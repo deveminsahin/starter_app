@@ -31,7 +31,7 @@ abstract final class RouteDefinitions {
 
   // ==================== Name Definitions ====================
 
-  /// Dashboard route name: 'Dashboard'
+  /// Dashboard route name: 'dashboard'
   static const String dashboardName = 'dashboard';
 
   /// Settings route name: 'settings'

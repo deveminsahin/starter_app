@@ -1,12 +1,12 @@
 part of '../../../../core/navigation/app_router.dart';
 
-/// Settings route - displays the settings page.
+/// Orders route - displays the orders page.
 ///
-/// This route provides access to application settings including:
-/// - Theme preferences
-/// - Language selection
-/// - Notification settings
-/// - Account management
+/// This route provides access to order management including:
+/// - Order history
+/// - Order details
+/// - Order tracking
+/// - Order status updates
 @TypedGoRoute<OrdersRoute>(
   path: RouteDefinitions.ordersPath,
   name: RouteDefinitions.ordersName,
