@@ -199,6 +199,98 @@ void main() {
         expect(result['count'], equals(5));
         expect(result['active'], equals(true));
       });
+
+      test('should filter sensitive data in lists containing maps', () {
+        final data = {
+          'users': [
+            {'name': 'John', 'password': 'secret123'},
+            {'name': 'Jane', 'token': 'abc456'},
+          ],
+        };
+
+        final result = filter.filter(data);
+        final users = result['users'] as List<dynamic>;
+        final user1 = users[0] as Map<String, dynamic>;
+        final user2 = users[1] as Map<String, dynamic>;
+
+        expect(user1['name'], equals('John'));
+        expect(user1['password'], equals('***REDACTED***'));
+        expect(user2['name'], equals('Jane'));
+        expect(user2['token'], equals('***REDACTED***'));
+      });
+
+      test('should filter nested lists containing maps', () {
+        final data = {
+          'departments': [
+            {
+              'name': 'Engineering',
+              'employees': [
+                {'name': 'Alice', 'api_key': 'key1'},
+                {'name': 'Bob', 'credential': 'cred2'},
+              ],
+            },
+          ],
+        };
+
+        final result = filter.filter(data);
+        final departments = result['departments'] as List<dynamic>;
+        final engineering = departments[0] as Map<String, dynamic>;
+        final employees = engineering['employees'] as List<dynamic>;
+        final alice = employees[0] as Map<String, dynamic>;
+        final bob = employees[1] as Map<String, dynamic>;
+
+        expect(engineering['name'], equals('Engineering'));
+        expect(alice['name'], equals('Alice'));
+        expect(alice['api_key'], equals('***REDACTED***'));
+        expect(bob['name'], equals('Bob'));
+        expect(bob['credential'], equals('***REDACTED***'));
+      });
+
+      test('should handle deeply nested lists', () {
+        final data = {
+          'level1': [
+            [
+              [
+                {'secret': 'deep_secret'},
+              ],
+            ],
+          ],
+        };
+
+        final result = filter.filter(data);
+        final level1 = result['level1'] as List<dynamic>;
+        final level2 = level1[0] as List<dynamic>;
+        final level3 = level2[0] as List<dynamic>;
+        final item = level3[0] as Map<String, dynamic>;
+
+        expect(item['secret'], equals('***REDACTED***'));
+      });
+
+      test('should preserve non-sensitive data in lists', () {
+        final data = {
+          'scores': [100, 95, 87],
+          'names': ['Alice', 'Bob', 'Charlie'],
+          'mixed': [1, 'two', true, null],
+        };
+
+        final result = filter.filter(data);
+
+        expect(result['scores'], equals([100, 95, 87]));
+        expect(result['names'], equals(['Alice', 'Bob', 'Charlie']));
+        expect(result['mixed'], equals([1, 'two', true, null]));
+      });
+
+      test('should handle empty lists', () {
+        final data = {
+          'empty': <dynamic>[],
+          'data': 'value',
+        };
+
+        final result = filter.filter(data);
+
+        expect(result['empty'], equals(<dynamic>[]));
+        expect(result['data'], equals('value'));
+      });
     });
 
     group('shouldFilter', () {
