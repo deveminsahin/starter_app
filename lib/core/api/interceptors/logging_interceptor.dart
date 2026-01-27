@@ -77,8 +77,8 @@ final class LoggingInterceptor implements Interceptor {
         'url': response.base.request?.url.toString() ?? 'UNKNOWN',
         'statusCode': response.statusCode,
         'duration': '${durationMs}ms',
-        'headers': response.headers,
-        'body': _formatResponseBody(response.body),
+        'headers': _sanitizeHeaders(Map<String, String>.from(response.headers)),
+        'body': _sanitizeBody(_formatResponseBody(response.body)),
       },
       tag: 'API',
     );
@@ -144,6 +144,13 @@ final class LoggingInterceptor implements Interceptor {
         'accessToken',
         'secret',
         'apiKey',
+        'pin',
+        'otp',
+        'cvv',
+        'cardNumber',
+        'creditCard',
+        'ssn',
+        'socialSecurityNumber',
       ];
 
       for (final key in sanitized.keys.toList()) {

@@ -65,5 +65,23 @@ void main() {
 
       verify(() => mockChain.proceed(request)).called(1);
     });
+
+    test('does not add header when token is empty string', () async {
+      final interceptor = AuthInterceptor(() async => '');
+      final request = Request(
+        'GET',
+        Uri.parse('https://example.com'),
+        Uri.parse('base'),
+      );
+      final response = Response(http.Response('', 200), null);
+
+      when(() => mockChain.request).thenReturn(request);
+      when(() => mockChain.proceed(any())).thenAnswer((_) async => response);
+
+      await interceptor.intercept(mockChain);
+
+      // Should proceed with original request (no auth header added)
+      verify(() => mockChain.proceed(request)).called(1);
+    });
   });
 }

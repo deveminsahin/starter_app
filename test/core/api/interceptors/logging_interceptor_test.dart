@@ -252,8 +252,11 @@ void main() {
             data: any(
               named: 'data',
               that: predicate<Map<String, dynamic>>((data) {
+                // After sanitization, the string body shows character count
+                // First _formatResponseBody truncates, then _sanitizeBody
+                // converts to character count format
                 final body = data['body'] as String;
-                return body.length < largeBody.length && body.contains('...');
+                return body.contains('characters');
               }),
             ),
             tag: 'API',

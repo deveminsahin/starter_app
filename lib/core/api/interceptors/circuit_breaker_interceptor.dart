@@ -9,7 +9,7 @@ import 'package:starter_app/core/error/exceptions/circuit_breaker_exception.dart
 /// 1. Checks if circuit is OPEN before request.
 /// 2. Records SUCCESS/FAILURE after request.
 /// 3. Trips circuit on 5xx errors or exceptions.
-class CircuitBreakerInterceptor implements Interceptor {
+final class CircuitBreakerInterceptor implements Interceptor {
   CircuitBreakerInterceptor(this._circuitBreaker);
 
   final ICircuitBreaker _circuitBreaker;

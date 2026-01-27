@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter_app/core/domain/ports/i_token_storage.dart';
+import 'package:starter_app/core/logging/i_app_logger.dart';
 import 'package:synchronized/synchronized.dart';
 
 /// Interceptor that automatically refreshes expired access tokens.
@@ -40,8 +41,10 @@ final class RefreshTokenInterceptor implements Interceptor {
     required this.baseUrl,
     required Lock refreshLock,
     http.Client? httpClient,
+    IAppLogger? logger,
   }) : _lock = refreshLock,
-       _httpClient = httpClient;
+       _httpClient = httpClient,
+       _logger = logger;
 
   /// Optional HTTP client for testing. If not provided, ChopperClient
   /// will create its own default client.
@@ -66,6 +69,9 @@ final class RefreshTokenInterceptor implements Interceptor {
   /// Injected via DI to ensure single instance across app
   final Lock _lock;
 
+  /// Optional logger for debugging token refresh flow
+  final IAppLogger? _logger;
+
   @override
   FutureOr<Response<BodyType>> intercept<BodyType>(
     Chain<BodyType> chain,
@@ -87,15 +93,21 @@ final class RefreshTokenInterceptor implements Interceptor {
     }
 
     // Try to refresh the token
+    _logger?.debug('401 received, attempting token refresh', tag: 'AUTH');
     final newToken = await _refreshToken();
 
     // If refresh failed, call failure callback and return original 401
     if (newToken == null) {
+      _logger?.warning(
+        'Token refresh failed, user will be logged out',
+        tag: 'AUTH',
+      );
       onRefreshFailed();
       return response;
     }
 
     // Retry the original request with new token
+    _logger?.info('Token refresh successful, retrying request', tag: 'AUTH');
     final newRequest = applyHeader(
       request,
       'Authorization',
@@ -115,6 +127,7 @@ final class RefreshTokenInterceptor implements Interceptor {
       // Get refresh token from storage
       final refreshToken = await tokenStorage.getRefreshToken();
       if (refreshToken == null || refreshToken.isEmpty) {
+        _logger?.warning('No refresh token available', tag: 'AUTH');
         return null;
       }
 
@@ -167,8 +180,13 @@ final class RefreshTokenInterceptor implements Interceptor {
 
         // Refresh failed
         return null;
-      } on Exception {
+      } on Exception catch (e) {
         // Error during refresh
+        _logger?.error(
+          'Exception during token refresh',
+          error: e,
+          tag: 'AUTH',
+        );
         return null;
       } finally {
         client.dispose();

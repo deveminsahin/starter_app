@@ -1,18 +1,18 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
+import 'package:starter_app/core/api/interceptors/api_key_interceptor.dart';
 
-/// Authentication interceptor for adding auth headers to requests.
+/// Authentication interceptor for adding Bearer tokens to requests.
 ///
-/// Automatically adds authentication tokens to API requests.
-/// Supports:
-/// - Bearer token authentication
-/// - API key authentication
-/// - Custom header authentication
+/// Automatically adds the `Authorization: Bearer <token>` header to API
+/// requests when a token is available.
+///
+/// For API key authentication, use [ApiKeyInterceptor] instead.
 ///
 /// Usage:
 /// ```dart
-/// Inject token provider
+/// // Inject token provider from your auth service
 /// final interceptor = AuthInterceptor(() async => await getToken());
 /// ```
 final class AuthInterceptor implements Interceptor {
