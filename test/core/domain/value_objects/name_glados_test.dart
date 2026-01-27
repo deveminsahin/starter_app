@@ -15,14 +15,29 @@ void main() {
       }
     });
 
-    // 2. Property: Non-empty strings are valid
+    // 2. Property: Non-empty strings within max length are valid
     // We filter input manually since any.nonEmptyString might not exist
-    Glados(any.letters).test('Non-empty strings are valid', (input) {
+    Glados(any.letters).test('Non-empty strings within max length are valid', (
+      input,
+    ) {
+      // Skip empty strings and strings exceeding max length
       if (input.trim().isEmpty) return;
+      if (input.trim().length > Name.maxLength) return;
 
       final name = Name(input);
       expect(name.isValid, isTrue);
       expect(name.getOrCrash(), equals(input.trim()));
+    });
+
+    // 3. Property: Strings exceeding max length are invalid
+    Glados(any.letters).test('Strings exceeding max length are invalid', (
+      input,
+    ) {
+      // Only test strings that would exceed max length
+      if (input.trim().length <= Name.maxLength) return;
+
+      final name = Name(input);
+      expect(name.isValid, isFalse);
     });
   });
 }

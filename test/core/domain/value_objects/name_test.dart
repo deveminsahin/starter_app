@@ -54,6 +54,25 @@ void main() {
         expect(failures, isNotNull);
         expect(failures!.first, isA<NameEmpty>());
       });
+
+      test('rejects name exceeding max length', () {
+        final longName = 'A' * 101; // > 100 chars
+        final name = Name(longName);
+
+        expect(name.isValid, false);
+
+        final failures = name.getFailuresOrNull();
+        expect(failures, isNotNull);
+        expect(failures!.first, isA<NameTooLong>());
+      });
+
+      test('accepts name at exactly max length', () {
+        final maxName = 'A' * 100;
+        final name = Name(maxName);
+
+        expect(name.isValid, true);
+        expect(name.getOrCrash().length, 100);
+      });
     });
 
     group('fromTrustedSource', () {
@@ -139,11 +158,13 @@ void main() {
         expect(name.getOrCrash(), 'Louis XIV');
       });
 
-      test('handles very long names', () {
+      test('rejects very long names exceeding max length', () {
         final longName = 'A' * 1000;
         final name = Name(longName);
 
-        expect(name.isValid, true);
+        expect(name.isValid, false);
+        final failures = name.getFailuresOrNull();
+        expect(failures!.first, isA<NameTooLong>());
       });
 
       test('handles special characters in names', () {

@@ -135,7 +135,6 @@ void main() {
 
         expect(failure, isA<PasswordMissingSpecialCharacter>());
       });
-
     });
 
     group('pattern matching', () {
@@ -216,6 +215,22 @@ void main() {
       const failure2 = NameFailure.empty();
 
       expect(failure1, failure2);
+    });
+
+    test('creates tooLong failure with lengths', () {
+      const failure = NameFailure.tooLong(
+        maxLength: 100,
+        actualLength: 150,
+      );
+
+      expect(failure, isA<NameTooLong>());
+      failure.when(
+        empty: () => fail('Wrong type'),
+        tooLong: (maxLength, actualLength) {
+          expect(maxLength, 100);
+          expect(actualLength, 150);
+        },
+      );
     });
   });
 
