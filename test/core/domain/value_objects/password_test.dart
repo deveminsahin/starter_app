@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:starter_app/core/domain/base/value_object.dart';
 import 'package:starter_app/core/domain/value_objects/password.dart';
-import 'package:starter_app/core/error/failures/password_failure.dart';
+import 'package:starter_app/core/domain/value_objects/password_failure.dart';
 
 void main() {
   group('Password', () {

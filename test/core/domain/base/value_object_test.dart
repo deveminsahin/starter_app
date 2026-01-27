@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:starter_app/core/domain/base/value_object.dart';
-import 'package:starter_app/core/error/failures/name_failure.dart';
-import 'package:starter_app/core/error/failures/password_failure.dart';
+import 'package:starter_app/core/domain/value_objects/name_failure.dart';
+import 'package:starter_app/core/domain/value_objects/password_failure.dart';
 import 'package:starter_app/core/error/failures/value_failure.dart';
 
 /// Test implementation of ValueObject for testing purposes.

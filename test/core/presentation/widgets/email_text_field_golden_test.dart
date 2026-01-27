@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter_app/core/domain/value_objects/email_address.dart';
-import 'package:starter_app/core/error/failures/email_failure.dart';
+import 'package:starter_app/core/domain/value_objects/email_failure.dart';
 import 'package:starter_app/core/error/failures/failure.dart';
 import 'package:starter_app/core/presentation/services/failure_message_service.dart';
 import 'package:starter_app/core/presentation/widgets/email_text_field.dart';

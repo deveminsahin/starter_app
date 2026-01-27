@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:starter_app/core/error/failures/token_failure.dart';
 import 'package:starter_app/core/error/failures/value_failure.dart';
 import 'package:starter_app/features/auth/domain/value_objects/auth_token.dart';
+import 'package:starter_app/features/auth/domain/value_objects/token_failure.dart';
 
 void main() {
   group('AuthToken', () {

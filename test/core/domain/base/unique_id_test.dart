@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:starter_app/core/domain/base/unique_id.dart';
-import 'package:starter_app/core/error/failures/unique_id_failure.dart';
+import 'package:starter_app/core/domain/base/unique_id_failure.dart';
 
 void main() {
   group('UniqueId', () {
