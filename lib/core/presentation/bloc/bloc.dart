@@ -1,6 +1,7 @@
 /// Core presentation BLoC/Cubit exports.
 ///
 /// Provides centralized access to cross-cutting presentation state management:
+/// - AppBlocObserver: Global BLoC event and state logging
 /// - ThemeCubit: Dynamic theme switching with persistence
 /// - LocaleCubit: Language/locale management with persistence
 ///
@@ -14,5 +15,6 @@
 /// - Localization resources → `core/l10n/`
 library;
 
+export 'app_bloc_observer.dart';
 export 'locale_cubit.dart';
 export 'theme_cubit.dart';

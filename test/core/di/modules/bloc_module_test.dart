@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter_app/core/di/modules/bloc_module.dart';
+import 'package:starter_app/core/presentation/bloc/app_bloc_observer.dart';
 import 'package:starter_app/core/presentation/bloc/locale_cubit.dart';
 import 'package:starter_app/core/presentation/bloc/theme_cubit.dart';
 
