@@ -82,14 +82,15 @@ Sets up global error handlers for uncaught errors.
 Handles Sentry SDK initialization and startup diagnostics.
 
 **Responsibilities:**
-- Initialize Sentry SDK (staging/production only)
+- Initialize Sentry SDK via `ISentryInitializer` (staging/production only)
 - Log startup configuration
 - Add lifecycle breadcrumbs
 
 **Dependencies:**
 - `IAppLogger` - Console logging
 - `IErrorReporter` - Sentry breadcrumbs
-- `IPlatformInfo` - OS version info
+- `IPlatformInfo` - Platform and OS version info
+- `IMonitoringInitializer` - SDK initialization (keeps infrastructure decoupled)
 
 ---
 
