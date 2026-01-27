@@ -15,6 +15,7 @@ import 'package:uuid/uuid.dart';
 ///
 /// Returns specific [UniqueIdFailure] types for clear error messages:
 /// - [UniqueIdEmpty] - ID is empty or null
+/// - [UniqueIdInvalidFormat] - ID is not a valid UUID format
 ///
 /// Example:
 /// ```dart
@@ -38,6 +39,7 @@ import 'package:uuid/uuid.dart';
 /// result.fold(
 ///   (failures) => failures.first.when(
 ///     empty: () => print('ID is required'),
+///     invalidFormat: () => print('ID must be a valid UUID'),
 ///   ),
 ///   (id) => print('Valid ID: $id'),
 /// );
@@ -64,20 +66,38 @@ final class UniqueId {
   /// or [UniqueId.fromUntrusted] for user input validation.
   const UniqueId._(this.value);
 
+  /// UUID format regex pattern.
+  /// Matches: 8-4-4-4-12 hexadecimal characters (any UUID version).
+  static final _uuidRegex = RegExp(
+    r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+    caseSensitive: false,
+  );
+
   /// The underlying ID value.
   final String value;
 
-  /// Creates a [UniqueId] from a string, validating that it's not empty.
+  /// Creates a [UniqueId] from a string, validating that it's not empty
+  /// and has a valid UUID format.
   ///
   /// Returns [Left] with a list of [UniqueIdFailure] if validation fails,
   /// or [Right] with a valid [UniqueId] if successful.
+  ///
+  /// Validation:
+  /// - Empty/null input returns [UniqueIdEmpty]
+  /// - Invalid UUID format returns [UniqueIdInvalidFormat]
   static Either<List<ValueFailure<String>>, UniqueId> fromUntrusted(
     String? input,
   ) {
     if (input == null || input.trim().isEmpty) {
       return left([const UniqueIdFailure.empty()]);
     }
-    return right(UniqueId._(input.trim()));
+
+    final trimmed = input.trim();
+    if (!_uuidRegex.hasMatch(trimmed)) {
+      return left([const UniqueIdFailure.invalidFormat()]);
+    }
+
+    return right(UniqueId._(trimmed));
   }
 
   @override
