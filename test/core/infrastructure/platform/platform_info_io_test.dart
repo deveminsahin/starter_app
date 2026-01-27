@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:starter_app/core/domain/ports/i_platform_info.dart';
 import 'package:starter_app/core/infrastructure/platform/platform_info_io.dart';
@@ -40,6 +41,27 @@ void main() {
       test('returns consistent value on multiple calls', () {
         final result1 = platformInfo.operatingSystemVersion;
         final result2 = platformInfo.operatingSystemVersion;
+
+        expect(result1, equals(result2));
+      });
+    });
+
+    group('targetPlatform', () {
+      test('returns defaultTargetPlatform.name', () {
+        final result = platformInfo.targetPlatform;
+
+        expect(result, equals(defaultTargetPlatform.name));
+      });
+
+      test('returns non-empty string', () {
+        final result = platformInfo.targetPlatform;
+
+        expect(result, isNotEmpty);
+      });
+
+      test('returns consistent value on multiple calls', () {
+        final result1 = platformInfo.targetPlatform;
+        final result2 = platformInfo.targetPlatform;
 
         expect(result1, equals(result2));
       });
