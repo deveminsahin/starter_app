@@ -342,6 +342,65 @@ Your backend WebSocket endpoints should:
 }
 ```
 
+## Security Considerations
+
+### Token Transmission via Query Parameter
+
+⚠️ **Important**: Tokens are transmitted via URL query parameters for browser compatibility.
+This is a known limitation of WebSocket connections in browsers, where custom headers 
+cannot be set during the handshake.
+
+**Potential Risks:**
+- URL query parameters may be logged in server access logs
+- Tokens may appear in browser history (less relevant for mobile)
+- Tokens may be exposed in proxy/CDN logs
+
+**Recommended Mitigations:**
+
+1. **Use Short-Lived Tokens for WebSocket**
+   ```dart
+   // Request a short-lived token specifically for WebSocket connections
+   // Backend should issue tokens with 5-15 minute TTL for WebSocket
+   final wsToken = await authRepository.getWebSocketToken();
+   await connection.connect(headers: {'Authorization': 'Bearer $wsToken'});
+   ```
+
+2. **Backend Implementation**
+   ```
+   POST /auth/ws-token
+   Authorization: Bearer <main_access_token>
+   
+   Response: {
+     "ws_token": "short-lived-token",
+     "expires_in": 900  // 15 minutes
+   }
+   ```
+
+3. **Configure Server Logging**
+   - Exclude query parameters from access logs
+   - Or mask the `token` parameter specifically
+   - Example nginx: `log_format main '$remote_addr - $request_uri_without_query';`
+
+4. **Token Refresh on Reconnection**
+   The `ITokenRefreshNotifier` automatically notifies WebSocket connections 
+   when tokens are refreshed, triggering reconnection with new credentials.
+
+5. **Server-Side Validation**
+   - Validate token on every connection
+   - Implement connection-level rate limiting
+   - Track active connections per user
+   - Close stale connections proactively
+
+### Best Security Practices
+
+| Practice | Status | Notes |
+|----------|--------|-------|
+| WSS (TLS) for production | ✅ Required | Use `wss://` not `ws://` |
+| Short-lived tokens | ⚠️ Recommended | 5-15 min TTL for WS tokens |
+| Token refresh handling | ✅ Implemented | Via `ITokenRefreshNotifier` |
+| Connection cleanup | ✅ Implemented | Proper disposal on logout |
+| Server-side validation | ⚠️ Backend | Validate on each connection |
+
 ## Connection Flow
 
 ```mermaid

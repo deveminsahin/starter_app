@@ -146,7 +146,7 @@ const config = CircuitBreakerConfig.conservative;   // 5 failures, 60s reset
 final breaker = CircuitBreakerImpl(logger: logger, config: config);
 
 if (breaker.isOpen) {
-  return Failure.circuitOpen();
+  return Left(InfrastructureFailure.circuitBreaker());
 }
 
 try {
