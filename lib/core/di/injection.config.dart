@@ -38,6 +38,8 @@ import 'package:starter_app/core/domain/ports/i_certificate_service.dart'
     as _i787;
 import 'package:starter_app/core/domain/ports/i_data_filter.dart' as _i439;
 import 'package:starter_app/core/domain/ports/i_error_reporter.dart' as _i449;
+import 'package:starter_app/core/domain/ports/i_monitoring_initializer.dart'
+    as _i752;
 import 'package:starter_app/core/domain/ports/i_platform_info.dart' as _i314;
 import 'package:starter_app/core/domain/ports/i_secure_storage.dart' as _i663;
 import 'package:starter_app/core/domain/ports/i_session_manager.dart' as _i65;
@@ -55,6 +57,8 @@ import 'package:starter_app/core/feature_flags/i_feature_flag_service.dart'
     as _i185;
 import 'package:starter_app/core/infrastructure/circuit_breaker/circuit_breaker_config.dart'
     as _i448;
+import 'package:starter_app/core/infrastructure/error/sentry_monitoring_initializer.dart'
+    as _i245;
 import 'package:starter_app/core/infrastructure/security/certificate_service.dart'
     as _i55;
 import 'package:starter_app/core/infrastructure/session/session_manager_impl.dart'
@@ -191,6 +195,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1007.ExceptionHandler>(
       () => const _i1007.ExceptionHandler(),
     );
+    gh.lazySingleton<_i752.IMonitoringInitializer>(
+      () => const _i245.SentryMonitoringInitializer(),
+    );
     gh.singleton<_i533.ITokenRefreshNotifier>(
       () => _i540.TokenRefreshNotifierImpl(),
       dispose: (i) => i.dispose(),
@@ -265,6 +272,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i632.IAppLogger>(),
         gh<_i449.IErrorReporter>(),
         gh<_i314.IPlatformInfo>(),
+        gh<_i752.IMonitoringInitializer>(),
       ),
     );
     gh.lazySingleton<_i313.FailureMessageService>(

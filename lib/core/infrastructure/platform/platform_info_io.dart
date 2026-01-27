@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:starter_app/core/domain/ports/i_platform_info.dart';
 
 /// Native platform (iOS, Android, desktop) implementation of [IPlatformInfo].
@@ -10,4 +11,7 @@ class PlatformInfoImpl implements IPlatformInfo {
 
   @override
   String get operatingSystemVersion => Platform.operatingSystemVersion;
+
+  @override
+  String get targetPlatform => defaultTargetPlatform.name;
 }

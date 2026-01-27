@@ -25,4 +25,10 @@ abstract interface class IPlatformInfo {
   /// - Native: Returns OS version (e.g., "14.5" on iOS, "13" on Android)
   /// - Web: Returns browser user agent string
   String get operatingSystemVersion;
+
+  /// Returns the target platform name.
+  ///
+  /// This is the Flutter target platform (e.g., "android", "iOS", "web").
+  /// Used for logging and analytics without coupling to Flutter foundation.
+  String get targetPlatform;
 }

@@ -205,6 +205,8 @@ enum AppEnvironment {
   ///
   /// Converts HTTP(S) URL to WS(S) for WebSocket connections.
   /// Uses the same base URL but with WebSocket protocol.
+  ///
+  /// Throws [AssertionError] in debug mode if API URL doesn't use HTTP(S).
   String get webSocketUrl {
     const url = String.fromEnvironment('WS_URL');
 
@@ -212,9 +214,18 @@ enum AppEnvironment {
 
     // Convert HTTP(S) to WS(S)
     final baseUrl = apiBaseUrl;
-    return baseUrl
-        .replaceFirst('http://', 'ws://')
-        .replaceFirst('https://', 'wss://');
+
+    // Validate URL format - fail fast if misconfigured
+    assert(
+      baseUrl.startsWith('http://') || baseUrl.startsWith('https://'),
+      'API_URL must start with http:// or https:// for WebSocket conversion. '
+      'Got: $baseUrl',
+    );
+
+    if (baseUrl.startsWith('https://')) {
+      return baseUrl.replaceFirst('https://', 'wss://');
+    }
+    return baseUrl.replaceFirst('http://', 'ws://');
   }
 
   /// Display name for this environment (capitalized).

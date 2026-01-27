@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:starter_app/core/domain/ports/i_platform_info.dart';
 import 'package:web/web.dart' as web;
 
@@ -9,4 +10,7 @@ class PlatformInfoImpl implements IPlatformInfo {
 
   @override
   String get operatingSystemVersion => web.window.navigator.userAgent;
+
+  @override
+  String get targetPlatform => defaultTargetPlatform.name;
 }
