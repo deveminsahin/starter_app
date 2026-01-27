@@ -22,6 +22,7 @@ export 'domain/failure/auth_failure.dart';
 export 'domain/repositories/i_auth_repository.dart';
 export 'domain/value_objects/auth_token.dart';
 export 'domain/value_objects/refresh_token.dart';
+export 'domain/value_objects/token_failure.dart';
 // Infrastructure
 export 'infrastructure/datasources/auth_api_service.dart';
 export 'infrastructure/datasources/auth_endpoints.dart';

@@ -10,5 +10,6 @@ export 'event_dispatcher.dart';
 export 'query.dart';
 export 'specification.dart';
 export 'unique_id.dart';
+export 'unique_id_failure.dart';
 export 'usecase.dart';
 export 'value_object.dart';

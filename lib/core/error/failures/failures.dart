@@ -33,12 +33,7 @@
 /// ```
 library;
 
-export 'email_failure.dart';
 export 'failure.dart';
 export 'infrastructure_failures.dart';
-export 'name_failure.dart';
-export 'password_failure.dart';
 export 'technical_failure.dart';
-export 'token_failure.dart';
-export 'unique_id_failure.dart';
 export 'value_failure.dart';

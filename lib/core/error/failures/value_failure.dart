@@ -7,12 +7,13 @@ import 'package:starter_app/core/error/failures/failures.dart';
 /// errors with retry capability, value failures are business rule violations
 /// that typically require user correction.
 ///
-/// Each domain concept has its own specific failure type:
-/// - [PasswordFailure] - Password validation errors
-/// - [EmailFailure] - Email validation errors
-/// - [NameFailure] - Name validation errors
-/// - [TokenFailure] - Token validation errors
-/// - [UniqueIdFailure] - Unique ID validation errors
+/// **Co-location principle:** Each domain concept defines its own specific
+/// failure type co-located with its value object:
+/// - `core/domain/value_objects/email_failure.dart` - EmailFailure
+/// - `core/domain/value_objects/password_failure.dart` - PasswordFailure
+/// - `core/domain/value_objects/name_failure.dart` - NameFailure
+/// - `core/domain/base/unique_id_failure.dart` - UniqueIdFailure
+/// - `features/auth/domain/value_objects/token_failure.dart` - TokenFailure
 ///
 /// Example:
 /// ```dart

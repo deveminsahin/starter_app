@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:meta/meta.dart';
 
 import 'package:starter_app/core/domain/base/value_object.dart';
-import 'package:starter_app/core/error/failures/name_failure.dart';
+import 'package:starter_app/core/domain/value_objects/name_failure.dart';
 import 'package:starter_app/core/error/failures/value_failure.dart';
 
 /// Name value object with validation.

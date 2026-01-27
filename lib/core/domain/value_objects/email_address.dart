@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:meta/meta.dart';
 
 import 'package:starter_app/core/domain/base/value_object.dart';
-import 'package:starter_app/core/error/failures/email_failure.dart';
+import 'package:starter_app/core/domain/value_objects/email_failure.dart';
 import 'package:starter_app/core/error/failures/value_failure.dart';
 
 /// Email address value object with validation.

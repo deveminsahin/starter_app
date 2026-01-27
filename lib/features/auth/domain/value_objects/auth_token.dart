@@ -2,8 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:meta/meta.dart';
 
 import 'package:starter_app/core/domain/base/value_object.dart';
-import 'package:starter_app/core/error/failures/token_failure.dart';
 import 'package:starter_app/core/error/failures/value_failure.dart';
+import 'package:starter_app/features/auth/domain/value_objects/token_failure.dart';
 
 /// Authentication token (JWT) value object with validation.
 ///
