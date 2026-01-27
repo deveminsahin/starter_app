@@ -55,11 +55,12 @@ extension NameFailurePatterns on NameFailure {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NameEmpty value)?  empty,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NameEmpty value)?  empty,TResult Function( NameTooLong value)?  tooLong,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case NameEmpty() when empty != null:
-return empty(_that);case _:
+return empty(_that);case NameTooLong() when tooLong != null:
+return tooLong(_that);case _:
   return orElse();
 
 }
@@ -77,11 +78,12 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NameEmpty value)  empty,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NameEmpty value)  empty,required TResult Function( NameTooLong value)  tooLong,}){
 final _that = this;
 switch (_that) {
 case NameEmpty():
-return empty(_that);}
+return empty(_that);case NameTooLong():
+return tooLong(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -95,11 +97,12 @@ return empty(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NameEmpty value)?  empty,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NameEmpty value)?  empty,TResult? Function( NameTooLong value)?  tooLong,}){
 final _that = this;
 switch (_that) {
 case NameEmpty() when empty != null:
-return empty(_that);case _:
+return empty(_that);case NameTooLong() when tooLong != null:
+return tooLong(_that);case _:
   return null;
 
 }
@@ -116,10 +119,11 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  empty,TResult Function( int maxLength,  int actualLength)?  tooLong,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case NameEmpty() when empty != null:
-return empty();case _:
+return empty();case NameTooLong() when tooLong != null:
+return tooLong(_that.maxLength,_that.actualLength);case _:
   return orElse();
 
 }
@@ -137,10 +141,11 @@ return empty();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  empty,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  empty,required TResult Function( int maxLength,  int actualLength)  tooLong,}) {final _that = this;
 switch (_that) {
 case NameEmpty():
-return empty();}
+return empty();case NameTooLong():
+return tooLong(_that.maxLength,_that.actualLength);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -154,10 +159,11 @@ return empty();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  empty,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  empty,TResult? Function( int maxLength,  int actualLength)?  tooLong,}) {final _that = this;
 switch (_that) {
 case NameEmpty() when empty != null:
-return empty();case _:
+return empty();case NameTooLong() when tooLong != null:
+return tooLong(_that.maxLength,_that.actualLength);case _:
   return null;
 
 }
@@ -196,5 +202,73 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class NameTooLong extends NameFailure {
+  const NameTooLong({required this.maxLength, required this.actualLength}): super._();
+  
+
+ final  int maxLength;
+ final  int actualLength;
+
+/// Create a copy of NameFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$NameTooLongCopyWith<NameTooLong> get copyWith => _$NameTooLongCopyWithImpl<NameTooLong>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NameTooLong&&(identical(other.maxLength, maxLength) || other.maxLength == maxLength)&&(identical(other.actualLength, actualLength) || other.actualLength == actualLength));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,maxLength,actualLength);
+
+@override
+String toString() {
+  return 'NameFailure.tooLong(maxLength: $maxLength, actualLength: $actualLength)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $NameTooLongCopyWith<$Res> implements $NameFailureCopyWith<$Res> {
+  factory $NameTooLongCopyWith(NameTooLong value, $Res Function(NameTooLong) _then) = _$NameTooLongCopyWithImpl;
+@useResult
+$Res call({
+ int maxLength, int actualLength
+});
+
+
+
+
+}
+/// @nodoc
+class _$NameTooLongCopyWithImpl<$Res>
+    implements $NameTooLongCopyWith<$Res> {
+  _$NameTooLongCopyWithImpl(this._self, this._then);
+
+  final NameTooLong _self;
+  final $Res Function(NameTooLong) _then;
+
+/// Create a copy of NameFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? maxLength = null,Object? actualLength = null,}) {
+  return _then(NameTooLong(
+maxLength: null == maxLength ? _self.maxLength : maxLength // ignore: cast_nullable_to_non_nullable
+as int,actualLength: null == actualLength ? _self.actualLength : actualLength // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
 
 // dart format on

@@ -12,6 +12,7 @@ part 'name_failure.freezed.dart';
 /// // In UI mapper
 /// final message = failure.when(
 ///   empty: () => context.l10n.nameRequired,
+///   tooLong: (max, actual) => context.l10n.nameTooLong(max),
 /// );
 /// ```
 @freezed
@@ -20,4 +21,10 @@ sealed class NameFailure extends ValueFailure<String> with _$NameFailure {
 
   /// Name is empty.
   const factory NameFailure.empty() = NameEmpty;
+
+  /// Name exceeds maximum length.
+  const factory NameFailure.tooLong({
+    required int maxLength,
+    required int actualLength,
+  }) = NameTooLong;
 }
