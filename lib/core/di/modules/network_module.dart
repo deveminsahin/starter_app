@@ -164,7 +164,7 @@ abstract class NetworkModule {
         // 2. Add authentication headers
         AuthInterceptor(() => tokenStorage.getAccessToken()),
 
-        // 2. Handle 401 and refresh tokens (before ErrorInterceptor!)
+        // 3. Handle 401 and refresh tokens (before ErrorInterceptor!)
         RefreshTokenInterceptor(
           tokenStorage: tokenStorage,
           // Use AuthEndpoints constant for refresh path
@@ -178,10 +178,10 @@ abstract class NetworkModule {
           refreshLock: refreshLock,
         ),
 
-        // 3. Log requests/responses (after auth added)
+        // 4. Log requests/responses (after auth added)
         LoggingInterceptor(logger),
 
-        // 4. Convert HTTP errors to exceptions
+        // 5. Convert HTTP errors to exceptions
         ErrorInterceptor(networkErrorHandler),
       ],
     );
