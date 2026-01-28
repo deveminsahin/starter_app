@@ -5,6 +5,7 @@ import 'package:starter_app/core/l10n/arb/app_localizations.dart';
 import 'package:starter_app/core/theme/app_theme.dart';
 import 'package:starter_app/features/auth/l10n/auth_localizations.dart';
 import 'package:starter_app/features/dashboard/l10n/dashboard_localizations.dart';
+import 'package:starter_app/features/orders/l10n/orders_localizations.dart';
 import 'package:starter_app/features/profile/l10n/profile_localizations.dart';
 import 'package:starter_app/features/settings/l10n/settings_localizations.dart';
 
@@ -26,6 +27,7 @@ extension PumpApp on WidgetTester {
           AppLocalizations.delegate,
           AuthLocalizations.delegate,
           DashboardLocalizations.delegate,
+          OrdersLocalizations.delegate,
           ProfileLocalizations.delegate,
           SettingsLocalizations.delegate,
         ],
@@ -55,6 +57,7 @@ extension PumpApp on WidgetTester {
             AppLocalizations.delegate,
             AuthLocalizations.delegate,
             DashboardLocalizations.delegate,
+            OrdersLocalizations.delegate,
             ProfileLocalizations.delegate,
             SettingsLocalizations.delegate,
           ],

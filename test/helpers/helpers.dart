@@ -9,7 +9,6 @@ library;
 export 'fake_helpers.dart';
 export 'fixtures/fixtures.dart';
 export 'golden_test_helper.dart';
-export 'matchers.dart';
 export 'mock_helpers.dart';
 export 'pump_app.dart';
 export 'test_bloc.dart';
