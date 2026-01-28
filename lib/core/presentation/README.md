@@ -75,9 +75,7 @@ presentation/
     ├── app_text_field.dart
     ├── email_text_field.dart
     ├── loading_overlay.dart
-    ├── password_text_field.dart
-    ├── password_visibility_notifier.dart
-    └── password_visibility_wrapper.dart
+    └── password_text_field.dart
 ```
 
 ## Core Principles
