@@ -80,6 +80,7 @@ This project follows **Hexagonal Architecture** (Ports & Adapters) with **DDD ta
 | 🔐 **Authentication** | Login, Register, Token refresh, Logout with secure storage |
 | 📊 **Dashboard** | Home screen with adaptive navigation (Bar/Rail/Drawer) |
 | 👤 **Profile** | User profile management |
+| 📦 **Orders** | Order management and history |
 | ⚙️ **Settings** | Theme & locale switching with HydratedBloc persistence |
 | 🚩 **Feature Flags** | Runtime feature toggles without third-party services |
 | 🔌 **WebSocket** | Real-time communication with auto-reconnect |
@@ -244,6 +245,7 @@ lib/
 └── features/              # Business domain features
     ├── auth/              # Authentication (reference implementation)
     ├── dashboard/         # Home with adaptive navigation
+    ├── orders/            # Order management
     ├── profile/           # User profile management
     └── settings/          # Theme & locale switching
 ```
