@@ -212,7 +212,10 @@ lib/
     │   ├── application/  # Feature services (optional)
     │   ├── infrastructure/ # API implementations, DTOs
     │   └── presentation/ # UI, BLoCs
-    └── dashboard/
+    ├── dashboard/
+    ├── orders/
+    ├── profile/
+    └── settings/
 ```
 
 ---
