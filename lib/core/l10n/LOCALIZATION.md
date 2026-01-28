@@ -44,12 +44,12 @@ Open the appropriate ARB file (e.g., `lib/core/l10n/arb/app_en.arb`):
 ### 2. Use in Code
 
 ```dart
-import 'package:starter_app/core/l10n/l10n.dart';
+import 'package:starter_app/core/l10n/l10n_extensions.dart';
 
 @override
 Widget build(BuildContext context) {
-  final l10n = context.l10n;
-  return Text(l10n.helloWorld);
+  final l10n = context.appL10n;
+  return Text(l10n.appName);
 }
 ```
 
