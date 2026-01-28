@@ -9,7 +9,9 @@ lib/features/orders/
 ├── l10n/                          # Feature-scoped localizations
 │   ├── orders_en.arb              # English strings with @key descriptions
 │   ├── orders_es.arb              # Spanish translations
-│   ├── orders_localizations.dart
+│   ├── orders_localizations.dart  # Generated main localizations
+│   ├── orders_localizations_en.dart # Generated English
+│   ├── orders_localizations_es.dart # Generated Spanish
 │   └── l10n_extensions.dart       # BuildContext extension
 ├── presentation/
 │   ├── orders_page.dart           # Main orders page
