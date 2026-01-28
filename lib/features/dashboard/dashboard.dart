@@ -1,10 +1,9 @@
 /// Dashboard feature module.
 ///
-/// This feature handles all dashboard-related functionality including:
-/// - User dashboard display
-/// - Dashboard editing
-/// - Avatar/photo management
-/// - Account information
+/// This feature handles the main dashboard/home screen including:
+/// - Main landing page for authenticated users
+/// - Responsive grid layout demonstration
+/// - Navigation hub for other features
 ///
 /// ## Structure
 ///

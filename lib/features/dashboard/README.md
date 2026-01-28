@@ -6,16 +6,19 @@ The dashboard feature provides the main landing page for authenticated users, di
 
 ```
 dashboard/
-├── l10n/                    # Feature-specific localization
-│   ├── dashboard_en.arb     # English translations
-│   ├── dashboard_es.arb     # Spanish translations
-│   └── l10n_extensions.dart # BuildContext extension
+├── l10n/                           # Feature-specific localization
+│   ├── dashboard_en.arb            # English translations
+│   ├── dashboard_es.arb            # Spanish translations
+│   ├── dashboard_localizations.dart    # Generated delegate
+│   ├── dashboard_localizations_en.dart # Generated English
+│   ├── dashboard_localizations_es.dart # Generated Spanish
+│   └── l10n_extensions.dart        # BuildContext extension
 ├── presentation/
 │   ├── pages/
 │   │   └── dashboard_page.dart
 │   └── routes/
 │       └── dashboard_routes.dart
-└── dashboard.dart           # Barrel file
+└── dashboard.dart                  # Barrel file
 ```
 
 ## Architecture

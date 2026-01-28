@@ -95,7 +95,7 @@ void main() {
       expect(localizations.localeName, equals('en'));
     });
 
-    test('appBarTitle returns Home', () {
+    test('appBarTitle returns Dashboard', () {
       final localizations = DashboardLocalizationsEn();
 
       expect(localizations.appBarTitle, equals('Dashboard'));
@@ -109,7 +109,7 @@ void main() {
       expect(localizations.localeName, equals('es'));
     });
 
-    test('appBarTitle returns Inicio', () {
+    test('appBarTitle returns Tablero', () {
       final localizations = DashboardLocalizationsEs();
 
       expect(localizations.appBarTitle, equals('Tablero'));
