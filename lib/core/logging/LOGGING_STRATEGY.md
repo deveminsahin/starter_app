@@ -338,6 +338,6 @@ This ensures:
 ## References
 
 - [Sentry Flutter Documentation](https://docs.sentry.io/platforms/flutter/)
-- [Logger Package](https://pub.dev/packages/logger)
+- [Logging Package](https://pub.dev/packages/logging)
 - [Flutter Logging Best Practices](https://docs.flutter.dev/testing/errors)
 - [Chopper Interceptors](https://pub.dev/packages/chopper)

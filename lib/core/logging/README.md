@@ -27,12 +27,14 @@ lib/core/logging/
 └── README.md                 # Quick reference (this file)
 
 lib/core/error/
-├── i_error_reporter.dart     # Error tracking interface
-├── i_data_filter.dart        # Data filtering interface
 ├── sensitive_data_filter.dart # Filters sensitive keys
 └── reporters/
     ├── sentry_error_reporter.dart  # Sentry implementation
     └── no_op_error_reporter.dart   # Dev no-op
+
+lib/core/domain/ports/
+├── i_error_reporter.dart     # Error tracking interface
+└── i_data_filter.dart        # Data filtering interface
 ```
 
 ---
