@@ -80,7 +80,7 @@ class AppTheme {
         dialogElevation: 6,
 
         // Navigation bar styling
-        navigationBarHeight: 80,
+        navigationBarHeight: NavigationConstants.bottomNavHeight,
         navigationBarIndicatorRadius: BorderRadiusConstants.large,
         navigationBarIndicatorSchemeColor: SchemeColor.secondaryContainer,
         navigationBarSelectedIconSchemeColor: SchemeColor.onSecondaryContainer,
@@ -174,6 +174,9 @@ class AppTheme {
 
         // Dialog styling
         dialogRadius: BorderRadiusConstants.xLarge,
+        dialogElevation: 6,
+
+        drawerRadius: 0,
 
         // Navigation bar styling
         navigationBarHeight: NavigationConstants.bottomNavHeight,
@@ -191,8 +194,6 @@ class AppTheme {
         fabRadius: BorderRadiusConstants.large,
         fabUseShape: true,
         fabSchemeColor: SchemeColor.primaryContainer,
-
-        drawerRadius: 0,
       ),
 
       // Visual density

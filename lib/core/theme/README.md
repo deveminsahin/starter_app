@@ -301,7 +301,7 @@ The typography follows the MD3 type scale:
 | headlineLarge | 32 | 400 | 0 |
 | headlineMedium | 28 | 400 | 0 |
 | headlineSmall | 24 | 400 | 0 |
-| titleLarge | 22 | 500 | 0 |
+| titleLarge | 22 | 400 | 0 |
 | titleMedium | 16 | 500 | 0.15 |
 | titleSmall | 14 | 500 | 0.1 |
 | labelLarge | 14 | 500 | 0.1 |
