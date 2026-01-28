@@ -18,16 +18,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serverError => 'Something went wrong. Please try again.';
 
   @override
-  String get networkError => 'Couldn\'t connect to the server. Please check your connection';
+  String get networkError =>
+      'Couldn\'t connect to the server. Please check your connection';
 
   @override
   String get cacheError => 'Local storage error';
 
   @override
-  String get parseError => 'Invalid data format received. Please contact support.';
+  String get parseError =>
+      'Invalid data format received. Please contact support.';
 
   @override
-  String get circuitBreakerError => 'Circuit breaker tripped. Please try again later.';
+  String get circuitBreakerError =>
+      'Circuit breaker tripped. Please try again later.';
 
   @override
   String get passwordEmpty => 'Password is required';
@@ -43,16 +46,19 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get passwordMissingUppercase => 'Password must contain at least one uppercase letter';
+  String get passwordMissingUppercase =>
+      'Password must contain at least one uppercase letter';
 
   @override
-  String get passwordMissingLowercase => 'Password must contain at least one lowercase letter';
+  String get passwordMissingLowercase =>
+      'Password must contain at least one lowercase letter';
 
   @override
   String get passwordMissingDigit => 'Password must contain at least one digit';
 
   @override
-  String get passwordMissingSpecialCharacter => 'Password must contain at least one special character';
+  String get passwordMissingSpecialCharacter =>
+      'Password must contain at least one special character';
 
   @override
   String get emailEmpty => 'Email is required';
@@ -67,4 +73,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nameEmpty => 'Name is required';
+
+  @override
+  String nameTooLong(int maxLength) {
+    return 'Name must not exceed $maxLength characters';
+  }
+
+  @override
+  String get pageNotFound => 'Page not found';
+
+  @override
+  String get goBack => 'Go Back';
 }

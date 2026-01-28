@@ -86,5 +86,22 @@
     "nameEmpty": "Name is required",
     "@nameEmpty": {
         "description": "Error when name field is empty"
+    },
+    "nameTooLong": "Name must not exceed {maxLength} characters",
+    "@nameTooLong": {
+        "description": "Error when name is too long",
+        "placeholders": {
+            "maxLength": {
+                "type": "int"
+            }
+        }
+    },
+    "pageNotFound": "Page not found",
+    "@pageNotFound": {
+        "description": "Error message shown when a page/route is not found"
+    },
+    "goBack": "Go Back",
+    "@goBack": {
+        "description": "Button text to navigate back"
     }
 }

@@ -27,7 +27,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get parseError => 'Formato de datos inválido recibido';
 
   @override
-  String get circuitBreakerError => 'El disyuntor se ha disparado. Inténtelo de nuevo más tarde.';
+  String get circuitBreakerError =>
+      'El disyuntor se ha disparado. Inténtelo de nuevo más tarde.';
 
   @override
   String get passwordEmpty => 'La contraseña es requerida';
@@ -43,16 +44,20 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get passwordMissingUppercase => 'La contraseña debe contener al menos una letra mayúscula';
+  String get passwordMissingUppercase =>
+      'La contraseña debe contener al menos una letra mayúscula';
 
   @override
-  String get passwordMissingLowercase => 'La contraseña debe contener al menos una letra minúscula';
+  String get passwordMissingLowercase =>
+      'La contraseña debe contener al menos una letra minúscula';
 
   @override
-  String get passwordMissingDigit => 'La contraseña debe contener al menos un dígito';
+  String get passwordMissingDigit =>
+      'La contraseña debe contener al menos un dígito';
 
   @override
-  String get passwordMissingSpecialCharacter => 'La contraseña debe contener al menos un carácter especial';
+  String get passwordMissingSpecialCharacter =>
+      'La contraseña debe contener al menos un carácter especial';
 
   @override
   String get emailEmpty => 'El correo electrónico es requerido';
@@ -63,8 +68,20 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get emailInvalidFormat => 'Por favor ingresa un correo electrónico válido';
+  String get emailInvalidFormat =>
+      'Por favor ingresa un correo electrónico válido';
 
   @override
   String get nameEmpty => 'El nombre es requerido';
+
+  @override
+  String nameTooLong(int maxLength) {
+    return 'El nombre no debe exceder $maxLength caracteres';
+  }
+
+  @override
+  String get pageNotFound => 'Página no encontrada';
+
+  @override
+  String get goBack => 'Volver';
 }

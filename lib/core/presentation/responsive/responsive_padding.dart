@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter_app/core/constants/constants.dart' show PaddingWidgets;
 import 'package:starter_app/core/presentation/responsive/adaptive_layout_builder.dart';
 import 'package:starter_app/core/presentation/responsive/screen_size.dart';
 
@@ -56,11 +57,11 @@ final class ResponsivePadding extends StatelessWidget {
     return AdaptiveLayoutBuilder(
       builder: (context, screenSize) {
         final padding = switch (screenSize) {
-          ScreenSize.compact => mobilePadding ?? const EdgeInsets.all(16),
+          ScreenSize.compact => mobilePadding ?? PaddingWidgets.allMedium,
           ScreenSize.medium ||
-          ScreenSize.expanded => tabletPadding ?? const EdgeInsets.all(24),
+          ScreenSize.expanded => tabletPadding ?? PaddingWidgets.allLarge,
           ScreenSize.large ||
-          ScreenSize.extraLarge => desktopPadding ?? const EdgeInsets.all(32),
+          ScreenSize.extraLarge => desktopPadding ?? PaddingWidgets.allXLarge,
         };
 
         return Padding(

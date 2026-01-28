@@ -86,5 +86,22 @@
     "nameEmpty": "El nombre es requerido",
     "@nameEmpty": {
         "description": "Error cuando el campo de nombre está vacío"
+    },
+    "nameTooLong": "El nombre no debe exceder {maxLength} caracteres",
+    "@nameTooLong": {
+        "description": "Error cuando el nombre es demasiado largo",
+        "placeholders": {
+            "maxLength": {
+                "type": "int"
+            }
+        }
+    },
+    "pageNotFound": "Página no encontrada",
+    "@pageNotFound": {
+        "description": "Mensaje de error mostrado cuando no se encuentra una página/ruta"
+    },
+    "goBack": "Volver",
+    "@goBack": {
+        "description": "Texto del botón para navegar hacia atrás"
     }
 }

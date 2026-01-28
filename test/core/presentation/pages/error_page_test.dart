@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:starter_app/core/l10n/arb/app_localizations.dart';
 import 'package:starter_app/core/presentation/pages/error_page.dart';
 
 class MockGoRouterState extends Mock implements GoRouterState {}
@@ -18,14 +19,17 @@ void main() {
     testWidgets('renders correct error information', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: ErrorPage(state: mockState),
         ),
       );
 
-      expect(find.text('Error'), findsOneWidget);
+      // Use localized text - in English locale
+      expect(find.text('An unexpected error occurred'), findsOneWidget);
       expect(find.text('Page not found'), findsOneWidget);
       expect(find.text('/wrong-path'), findsOneWidget);
-      expect(find.text('Go Dashboard'), findsOneWidget);
+      expect(find.text('Go Back'), findsOneWidget);
       expect(find.byIcon(Icons.error_outline), findsOneWidget);
     });
 
@@ -54,11 +58,13 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: router,
         ),
       );
 
-      await tester.tap(find.text('Go Dashboard'));
+      await tester.tap(find.text('Go Back'));
       await tester.pumpAndSettle();
 
       expect(find.text('Dashboard Page'), findsOneWidget);
