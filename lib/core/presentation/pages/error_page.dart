@@ -26,8 +26,8 @@ final class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = TextTheme.of(context);
+    final colorScheme = ColorScheme.of(context);
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.unexpectedError)),
