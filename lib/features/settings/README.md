@@ -6,20 +6,23 @@ User settings management including theme, language, and account preferences.
 
 ```
 lib/features/settings/
-├── l10n/                          # Feature-scoped localizations
-│   ├── settings_en.arb            # English strings with @key descriptions
-│   ├── settings_es.arb            # Spanish translations
-│   ├── settings_localizations.dart
-│   └── l10n_extensions.dart       # BuildContext extension
+├── l10n/                              # Feature-scoped localizations
+│   ├── settings_en.arb                # English strings with @key descriptions
+│   ├── settings_es.arb                # Spanish translations
+│   ├── settings_localizations.dart    # Generated: delegate and abstract class
+│   ├── settings_localizations_en.dart # Generated: English implementation
+│   ├── settings_localizations_es.dart # Generated: Spanish implementation
+│   └── l10n_extensions.dart           # BuildContext extension
 ├── presentation/
 │   ├── pages/
-│   │   └── settings_page.dart     # Main settings page
+│   │   └── settings_page.dart         # Main settings page
 │   ├── routes/
-│   │   └── settings_routes.dart   # Shell branch route
+│   │   └── settings_routes.dart       # Shell branch route
 │   └── widgets/
-│       ├── language_selector.dart # Language switching widget
-│       └── theme_selector.dart    # Theme switching widget
-└── settings.dart                  # Barrel export
+│       ├── language_selector.dart     # Language switching widget
+│       ├── logout_button.dart         # Logout button for authenticated users
+│       └── theme_selector.dart        # Theme switching widget
+└── settings.dart                      # Barrel export
 ```
 
 ## Features
@@ -66,3 +69,4 @@ very_good test test/features/settings/
 |-----------|----------|
 | `settings_localizations_test.dart` | Delegate, lookup, all strings |
 | `settings_page_test.dart` | Widget interactions, button callbacks |
+| `logout_button_test.dart` | Visibility states, logout event dispatch |

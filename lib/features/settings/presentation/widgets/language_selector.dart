@@ -5,7 +5,7 @@ import 'package:starter_app/core/presentation/bloc/bloc.dart';
 import 'package:starter_app/core/presentation/responsive/responsive.dart';
 import 'package:starter_app/features/settings/l10n/l10n_extensions.dart';
 
-class LanguageSelector extends StatelessWidget {
+final class LanguageSelector extends StatelessWidget {
   const LanguageSelector({super.key});
 
   @override
