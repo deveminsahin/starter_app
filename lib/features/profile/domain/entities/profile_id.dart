@@ -1,10 +1,10 @@
 import 'package:starter_app/core/domain/base/unique_id.dart';
 
-/// Type-safe wrapper for [UniqueId] specifically for Users.
+/// Type-safe wrapper for [UniqueId] specifically for Profiles.
 ///
 /// This is a compile-time extension type (zero runtime cost).
 /// It prevents accidental usage of other IDs
-/// (like OrderId) where a UserId is expected.
+/// (like OrderId or UserId) where a ProfileId is expected.
 extension type const ProfileId(UniqueId value) implements UniqueId {
   /// Generates a new [ProfileId].
   factory ProfileId.generate() => ProfileId(UniqueId.generate());

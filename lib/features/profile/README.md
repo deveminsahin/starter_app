@@ -9,7 +9,7 @@ lib/features/profile/
 ├── domain/
 │   ├── entities/          # UserProfile, ProfileId
 │   ├── events/            # ProfileDomainEvent
-│   ├── failure/           # ProfileFailure, ProfileExceptionMapper
+│   ├── failure/           # ProfileFailure
 │   └── repositories/      # IUserProfileRepository
 ├── application/
 │   └── usecases/          # GetProfile query

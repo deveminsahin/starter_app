@@ -21,6 +21,7 @@ export 'application/usecases/get_profile.dart';
 export 'domain/entities/profile_id.dart';
 export 'domain/entities/user_profile.dart';
 export 'domain/events/profile_events.dart';
+export 'domain/failure/profile_failure.dart';
 export 'domain/repositories/i_user_profile_repository.dart';
 // Infrastructure
 export 'infrastructure/repositories/user_profile_repository_impl.dart';
