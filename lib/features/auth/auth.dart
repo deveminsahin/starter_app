@@ -15,11 +15,15 @@ export 'application/usecases/logout.dart';
 export 'application/usecases/refresh_token.dart';
 export 'application/usecases/register.dart';
 export 'application/usecases/watch_auth_changes.dart';
+export 'application/usecases/watch_session_expired.dart';
 // Domain
 export 'domain/entities/auth_credentials.dart';
 export 'domain/entities/user.dart';
+export 'domain/entities/user_id.dart';
+export 'domain/events/auth_events.dart';
 export 'domain/failure/auth_failure.dart';
 export 'domain/repositories/i_auth_repository.dart';
+export 'domain/services/user_registration_service.dart';
 export 'domain/value_objects/auth_token.dart';
 export 'domain/value_objects/refresh_token.dart';
 export 'domain/value_objects/token_failure.dart';

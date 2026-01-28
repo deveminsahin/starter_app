@@ -14,10 +14,12 @@ import 'package:starter_app/features/auth/domain/repositories/i_auth_repository.
 /// No validation needed as logout is always allowed.
 ///
 /// ## Flow
-/// 1. Get current user (to know who is logging out)
-/// 2. Call repository to invalidate session
-/// 3. Repository clears stored tokens
-/// 4. Dispatch UserLoggedOut event
+/// 1. Call repository to invalidate session on backend
+/// 2. Repository clears stored tokens locally
+/// 3. Repository disposes WebSocket connection
+///
+/// **Note:** Auth state changes are communicated via WebSocket events
+/// (session_expired, user_logged_out) which the BLoC handles.
 ///
 /// Example:
 /// ```dart
@@ -39,17 +41,5 @@ class Logout extends CommandNoParams<Unit> {
   /// - [Right(Unit)] on successful logout
   /// - [Left(Failure)] if logout fails
   @override
-  FutureResult<Unit> call() async {
-    // Ideally we would get the user ID first to dispatch a rich event,
-    // but for now we just perform the logout operation.
-    // In a stricter implementation, we might pass the UserID or fetch it.
-
-    // We attempt to get the current user ID from storage/repo before logging out
-    // if we wanted to be perfectly strict,
-    //  but 'logout' is often a "best effort"
-    // reset.
-
-    // We will just execute the logout.
-    return _repository.logout();
-  }
+  FutureResult<Unit> call() => _repository.logout();
 }

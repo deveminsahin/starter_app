@@ -70,17 +70,16 @@
     "@differentEmail": {
         "description": "Link text to change email address"
     },
-        "returnHome": "Return to home",
-        "@returnHome": {
-            "description": "Button text to return to home page"
-        },
-        "emailAlreadyInUse": "This email is already registered. Please login instead.",
-        "@emailAlreadyInUse": {
-            "description": "Error message shown when registration fails because email exists"
-        },
-        "invalidInput": "Please check your input and try again.",
-        "@invalidInput": {
-            "description": "Error message shown when server rejects input data"
-        }
+    "returnHome": "Return to home",
+    "@returnHome": {
+        "description": "Button text to return to home page"
+    },
+    "emailAlreadyInUse": "This email is already registered. Please login instead.",
+    "@emailAlreadyInUse": {
+        "description": "Error message shown when registration fails because email exists"
+    },
+    "invalidInput": "Please check your input and try again.",
+    "@invalidInput": {
+        "description": "Error message shown when server rejects input data"
     }
-    
+}

@@ -70,17 +70,16 @@
     "@differentEmail": {
         "description": "Texto del enlace para cambiar dirección de correo"
     },
-        "returnHome": "Volver al inicio",
-        "@returnHome": {
-            "description": "Texto del botón para volver a la página de inicio"
-        },
-        "emailAlreadyInUse": "Este correo ya está registrado. Por favor inicia sesión.",
-        "@emailAlreadyInUse": {
-            "description": "Mensaje de error cuando el registro falla porque el correo existe"
-        },
-        "invalidInput": "Por favor verifica tus datos e intenta de nuevo.",
-        "@invalidInput": {
-            "description": "Mensaje de error cuando el servidor rechaza los datos de entrada"
-        }
+    "returnHome": "Volver al inicio",
+    "@returnHome": {
+        "description": "Texto del botón para volver a la página de inicio"
+    },
+    "emailAlreadyInUse": "Este correo ya está registrado. Por favor inicia sesión.",
+    "@emailAlreadyInUse": {
+        "description": "Mensaje de error cuando el registro falla porque el correo existe"
+    },
+    "invalidInput": "Por favor verifica tus datos e intenta de nuevo.",
+    "@invalidInput": {
+        "description": "Mensaje de error cuando el servidor rechaza los datos de entrada"
     }
-    
+}
