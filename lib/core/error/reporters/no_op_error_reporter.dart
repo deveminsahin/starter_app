@@ -1,13 +1,12 @@
 import 'package:starter_app/core/domain/ports/i_error_reporter.dart';
-import 'package:starter_app/core/logging/i_app_logger.dart';
 import 'package:starter_app/features/auth/domain/entities/user.dart';
 
 /// No-op implementation of [IErrorReporter] for development environment.
 ///
-/// Does nothing - errors in development are logged to console via [IAppLogger].
+/// Does nothing - errors in development are logged to console via IAppLogger.
 /// This allows code to depend on [IErrorReporter] without null checks,
 /// while not sending any data externally during development.
-class NoOpErrorReporter implements IErrorReporter {
+final class NoOpErrorReporter implements IErrorReporter {
   /// Creates a NoOpErrorReporter.
   const NoOpErrorReporter();
 

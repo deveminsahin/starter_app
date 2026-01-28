@@ -24,6 +24,8 @@ class NameFailureMapper extends FailureMessageMapper {
     final nameFailure = failure as NameFailure;
     return nameFailure.when(
       empty: () => context.appL10n.nameEmpty,
+      tooLong: (maxLength, actualLength) =>
+          context.appL10n.nameTooLong(maxLength),
     );
   }
 }
