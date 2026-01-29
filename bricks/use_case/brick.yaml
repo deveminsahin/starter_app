@@ -1,0 +1,39 @@
+name: use_case
+description: Generate a Command or Query following CQRS pattern (ADR-010)
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Use case name (e.g., "GetUserProfile", "UpdateSettings")
+    prompt: What is the use case name?
+
+  feature_name:
+    type: string
+    description: Feature this belongs to (e.g., "product", "order")
+    prompt: What feature does this belong to?
+
+  type:
+    type: enum
+    description: Type of use case (CQRS pattern)
+    values:
+      - command
+      - query
+      - command_no_params
+      - query_no_params
+    default: query
+    prompt: What type of use case?
+
+  params_type:
+    type: string
+    description: Parameter type (leave empty for no_params variants)
+    default: ""
+    prompt: Parameter type (e.g., "UserId", "UpdateParams")?
+
+  output_type:
+    type: string
+    description: Return type
+    default: Unit
+    prompt: Output type (e.g., "User", "List<Product>")?

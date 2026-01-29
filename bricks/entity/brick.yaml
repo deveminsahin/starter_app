@@ -1,0 +1,22 @@
+name: entity
+description: Generate a domain entity extending Entity or AggregateRoot (NOT freezed per ADR-008)
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Entity name (e.g., "Product", "Order")
+    prompt: What is the entity name?
+
+  feature_name:
+    type: string
+    description: Feature this belongs to (e.g., "product", "order")
+    prompt: What feature does this belong to?
+
+  is_aggregate_root:
+    type: boolean
+    description: Extends AggregateRoot with domain events support
+    default: true
+    prompt: Is this an aggregate root (with domain events)?

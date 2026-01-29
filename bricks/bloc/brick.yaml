@@ -1,0 +1,16 @@
+name: bloc
+description: Generate a BLoC with freezed events and states (ADR-002, ADR-008)
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: BLoC name (e.g., "ProductList", "OrderDetails")
+    prompt: What is the BLoC name?
+
+  feature_name:
+    type: string
+    description: Feature this belongs to (e.g., "product", "order")
+    prompt: What feature does this belong to?

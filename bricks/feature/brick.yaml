@@ -1,0 +1,31 @@
+name: feature
+description: Generate a complete feature scaffold following Clean Architecture + DDD patterns
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+repository: https://github.com/user/starter_app
+
+vars:
+  feature_name:
+    type: string
+    description: Feature name (e.g., "product", "order", "payment")
+    prompt: What is the feature name?
+
+  include_bloc:
+    type: boolean
+    description: Include BLoC with events and states
+    default: true
+    prompt: Include BLoC?
+
+  include_repository:
+    type: boolean
+    description: Include repository interface and implementation
+    default: true
+    prompt: Include repository?
+
+  include_tests:
+    type: boolean
+    description: Generate test files
+    default: true
+    prompt: Generate test files?

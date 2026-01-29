@@ -1,0 +1,21 @@
+name: repository
+description: Generate a repository interface and implementation
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Repository name (e.g., "Product", "Order")
+    prompt: What is the repository name?
+
+  feature_name:
+    type: string
+    description: Feature this belongs to (e.g., "product", "order")
+    prompt: What feature does this belong to?
+
+  entity_name:
+    type: string
+    description: Primary entity type (defaults to repository name)
+    prompt: What is the primary entity name?

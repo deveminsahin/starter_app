@@ -1,0 +1,27 @@
+name: value_object
+description: Generate a ValueObject with validation following the base class pattern
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Value object name (e.g., "PhoneNumber", "Currency", "Quantity")
+    prompt: What is the value object name?
+
+  feature_name:
+    type: string
+    description: Feature this belongs to (use "core" for shared value objects)
+    default: core
+    prompt: What feature does this belong to?
+
+  value_type:
+    type: enum
+    description: Underlying value type
+    values:
+      - String
+      - int
+      - double
+    default: String
+    prompt: What is the underlying value type?

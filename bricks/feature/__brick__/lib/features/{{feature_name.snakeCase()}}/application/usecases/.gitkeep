@@ -1,0 +1,7 @@
+# Use Cases Directory
+
+Add your use cases here following CQRS pattern (ADR-010):
+- Commands for write operations (e.g., `CreateProduct`, `UpdateOrder`)
+- Queries for read operations (e.g., `GetProduct`, `ListOrders`)
+
+Use `mason make use_case` to generate new use cases.
