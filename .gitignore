@@ -115,9 +115,10 @@ app.*.map.json
 # Generated l10n files
 lib/l10n/gen/
 
-# Environment configuration files (keep example only)
+# Environment configuration files
+# Copy *.json.example to *.json and customize for your environment
 config/*.json
-!config/example.json
+!config/*.json.example
 
 # Environment files
 .env
@@ -130,4 +131,3 @@ config/*.json
 google-services.json
 GoogleService-Info.plist
 firebase_options.dart
-validation/

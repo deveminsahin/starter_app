@@ -4,20 +4,24 @@ Configuration files for different environments using `--dart-define-from-file`.
 
 ## 📁 Files
 
-- `development.json` - Development environment (local development)
-- `staging.json` - Staging environment (pre-production testing)
-- `production.json` - Production environment (live)
-- `example.json` - Example template (committed to git)
+**Templates (committed to git):**
+- `development.json.example` - Development environment template
+- `staging.json.example` - Staging environment template
+- `production.json.example` - Production environment template
+
+**Your configs (gitignored):**
+- `development.json` - Your local development config
+- `staging.json` - Your staging config
+- `production.json` - Your production config
 
 ## 🔒 Security
 
-**⚠️ IMPORTANT: Never commit actual credentials!**
+**⚠️ IMPORTANT: Actual configs are gitignored by default!**
 
 ```gitignore
-# Add to .gitignore
+# Already in .gitignore
 config/*.json
-!config/example.json
-!config/README.md
+!config/*.json.example
 ```
 
 ## 🚀 Usage
@@ -53,22 +57,23 @@ flutter build apk --release --dart-define-from-file=config/production.json
 
 ## 🎯 Setup Instructions
 
-1. **Copy example file:**
+1. **Copy example files:**
 
    ```bash
-   cp config/example.json config/staging.json
-   cp config/example.json config/production.json
+   cp config/development.json.example config/development.json
+   cp config/staging.json.example config/staging.json
+   cp config/production.json.example config/production.json
    ```
 
 2. **Update values:**
-   Edit `staging.json` and `production.json` with your actual values.
+   Edit each `.json` file with your actual values.
 
 3. **Verify .gitignore:**
    Ensure credentials are not committed:
 
    ```bash
    git status config/
-   # Should NOT show staging.json or production.json
+   # Should only show .example files, NOT actual .json files
    ```
 
 4. **Run with config:**
@@ -107,10 +112,10 @@ build:production:
 
 | File | ENVIRONMENT | SENTRY_DSN | API_URL | Committed |
 |------|-------------|------------|---------|-----------|
-| `development.json` | development | - | Default | ❌ No |
-| `staging.json` | staging | Staging DSN | Staging URL | ❌ No |
-| `production.json` | production | Prod DSN | Prod URL | ❌ No |
-| `example.json` | staging | Example | Example | ✅ Yes |
+| `development.json.example` | development | - | localhost | ✅ Yes |
+| `staging.json.example` | staging | Placeholder | Placeholder | ✅ Yes |
+| `production.json.example` | production | Placeholder | Placeholder | ✅ Yes |
+| `*.json` (actual) | varies | Real values | Real values | ❌ No |
 
 ## ✅ Benefits
 

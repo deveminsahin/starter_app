@@ -1,0 +1,5 @@
+{
+  "ENVIRONMENT": "production",
+  "SENTRY_DSN": "https://your-production-dsn@sentry.io/project-id",
+  "API_URL": "https://api.example.com"
+}
