@@ -1,17 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:starter_app/core/l10n/arb/app_localizations_en.dart';
+import 'package:starter_app/core/l10n/arb/app_localizations_es.dart';
 
 void main() {
-  late AppLocalizationsEn localizations;
+  late AppLocalizationsEs localizations;
 
   setUp(() {
-    localizations = AppLocalizationsEn();
+    localizations = AppLocalizationsEs();
   });
 
-  group('AppLocalizationsEn', () {
+  group('AppLocalizationsEs', () {
     group('static getters', () {
       test('appName returns expected value', () {
-        expect(localizations.appName, 'Starter App');
+        expect(localizations.appName, 'Aplicación Inicial');
       });
 
       test('unexpectedError returns expected value', () {
@@ -43,21 +43,21 @@ void main() {
       });
 
       test('passwordMissingUppercase returns expected value', () {
-        expect(localizations.passwordMissingUppercase, contains('uppercase'));
+        expect(localizations.passwordMissingUppercase, contains('mayúscula'));
       });
 
       test('passwordMissingLowercase returns expected value', () {
-        expect(localizations.passwordMissingLowercase, contains('lowercase'));
+        expect(localizations.passwordMissingLowercase, contains('minúscula'));
       });
 
       test('passwordMissingDigit returns expected value', () {
-        expect(localizations.passwordMissingDigit, contains('digit'));
+        expect(localizations.passwordMissingDigit, contains('dígito'));
       });
 
       test('passwordMissingSpecialCharacter returns expected value', () {
         expect(
           localizations.passwordMissingSpecialCharacter,
-          contains('special'),
+          contains('especial'),
         );
       });
 
@@ -66,21 +66,22 @@ void main() {
       });
 
       test('emailInvalidFormat returns expected value', () {
-        expect(localizations.emailInvalidFormat, contains('valid'));
+        expect(localizations.emailInvalidFormat, contains('válido'));
       });
 
       test('nameEmpty returns expected value', () {
         expect(localizations.nameEmpty, isNotEmpty);
+        expect(localizations.nameEmpty, 'El nombre es requerido');
       });
 
       test('pageNotFound returns expected value', () {
         expect(localizations.pageNotFound, isNotEmpty);
-        expect(localizations.pageNotFound, 'Page not found');
+        expect(localizations.pageNotFound, 'Página no encontrada');
       });
 
       test('goBack returns expected value', () {
         expect(localizations.goBack, isNotEmpty);
-        expect(localizations.goBack, 'Go Back');
+        expect(localizations.goBack, 'Volver');
       });
     });
 
@@ -94,7 +95,7 @@ void main() {
 
         // Assert
         expect(result, contains('$minLength'));
-        expect(result.toLowerCase(), contains('password'));
+        expect(result.toLowerCase(), contains('contraseña'));
       });
 
       test('passwordTooLong includes maxLength parameter', () {
@@ -106,7 +107,7 @@ void main() {
 
         // Assert
         expect(result, contains('$maxLength'));
-        expect(result.toLowerCase(), contains('password'));
+        expect(result.toLowerCase(), contains('contraseña'));
       });
 
       test('emailTooLong includes maxLength parameter', () {
@@ -118,7 +119,7 @@ void main() {
 
         // Assert
         expect(result, contains('$maxLength'));
-        expect(result.toLowerCase(), contains('email'));
+        expect(result.toLowerCase(), contains('correo'));
       });
 
       test('nameTooLong includes maxLength parameter', () {
@@ -130,19 +131,19 @@ void main() {
 
         // Assert
         expect(result, contains('$maxLength'));
-        expect(result.toLowerCase(), contains('name'));
+        expect(result.toLowerCase(), contains('nombre'));
       });
     });
 
     group('constructor', () {
-      test('default locale is en', () {
-        final l10n = AppLocalizationsEn();
-        expect(l10n.localeName, 'en');
+      test('default locale is es', () {
+        final l10n = AppLocalizationsEs();
+        expect(l10n.localeName, 'es');
       });
 
       test('custom locale is accepted', () {
-        final l10n = AppLocalizationsEn('en_US');
-        expect(l10n.localeName, 'en_US');
+        final l10n = AppLocalizationsEs('es_MX');
+        expect(l10n.localeName, 'es_MX');
       });
     });
   });

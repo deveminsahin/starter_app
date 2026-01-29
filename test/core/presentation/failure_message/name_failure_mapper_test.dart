@@ -69,6 +69,28 @@ void main() {
           ),
         );
       });
+
+      testWidgets('maps NameTooLong to nameTooLong message', (tester) async {
+        await tester.pumpApp(
+          Builder(
+            builder: (context) {
+              // Arrange
+              const failure = NameFailure.tooLong(
+                maxLength: 50,
+                actualLength: 75,
+              );
+
+              // Act
+              final message = mapper.map(context, failure);
+
+              // Assert
+              expect(message, isNotEmpty);
+              expect(message, contains('50'));
+              return const SizedBox();
+            },
+          ),
+        );
+      });
     });
   });
 }
