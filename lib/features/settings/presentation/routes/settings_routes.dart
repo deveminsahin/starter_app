@@ -2,7 +2,7 @@ part of '../../../../core/navigation/app_router.dart';
 
 final class SettingsBranch extends StatefulShellBranchData {
   static final List<NavigatorObserver> $observers = [
-    AppRouterObserver(name: 'settings'),
+    BranchNavigatorObserver(name: 'settings'),
   ];
 }
 

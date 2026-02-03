@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:starter_app/core/logging/i_app_logger.dart';
-import 'package:starter_app/core/navigation/app_router_observer.dart';
 import 'package:starter_app/core/navigation/auth_change_notifier.dart';
 import 'package:starter_app/core/navigation/base_route.dart';
+import 'package:starter_app/core/navigation/branch_navigator_observer.dart';
 import 'package:starter_app/core/navigation/page_builder.dart';
 import 'package:starter_app/core/navigation/route_definitions.dart';
 import 'package:starter_app/core/presentation/pages/error_page.dart';
@@ -29,19 +27,25 @@ part 'app_router.g.dart';
 /// This class encapsulates the GoRouter configuration with:
 /// - Type-safe routing via go_router_builder
 /// - Custom page transitions (slide forward, fade back)
-/// - Navigation debugging and logging
+/// - Navigation tracking via NavigationTrackingService
 /// - Adaptive navigation patterns
 /// - Dependency injection integration
-/// - **Reactive auth-based redirects via [AuthChangeNotifier]**
+/// - **Reactive auth-based redirects via AuthChangeNotifier**
 ///
 /// ## Authentication Redirects
 ///
-/// The router uses refreshListenable with [AuthChangeNotifier] to
+/// The router uses refreshListenable with AuthChangeNotifier to
 /// automatically re-evaluate redirect logic when authentication state changes.
 /// This enables:
 /// - Automatic redirect to dashboard on logout
 /// - Protection of deep-linked routes
 /// - Optional redirect of authenticated users away from auth page
+///
+/// ## Navigation Tracking
+///
+/// Navigation events are tracked globally by NavigationTrackingService
+/// which listens to GoRouterDelegate.currentConfiguration. This captures
+/// ALL route changes including shell route branch switches.
 ///
 /// Usage:
 /// ```dart
@@ -58,12 +62,10 @@ class AppRouter {
   // ignore: comment_references
   /// [authChangeNotifier] enables reactive redirects on auth state changes.
   AppRouter(
-    this._routerObserver,
     this._pageBuilder,
     this._authChangeNotifier,
   );
 
-  final NavigatorObserver _routerObserver;
   final PageBuilder _pageBuilder;
   final AuthChangeNotifier _authChangeNotifier;
 
@@ -81,7 +83,6 @@ class AppRouter {
     navigatorKey: _rootNavigatorKey,
     initialLocation: RouteDefinitions.initialRoute,
     routes: $appRoutes,
-    observers: [_routerObserver],
     // Re-evaluate redirect when auth state changes
     refreshListenable: _authChangeNotifier,
     errorPageBuilder: (context, state) => _pageBuilder.build(
@@ -208,9 +209,9 @@ final class AppShellRoute extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
+    // Navigation events are tracked globally by INavigationEventService
     return AdaptiveNavigationScaffold(
       navigationShell: navigationShell,
-      logger: context.read<IAppLogger>(),
     );
   }
 }

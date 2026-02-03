@@ -3,8 +3,8 @@
 /// This package provides GoRouter-based navigation with:
 /// - Type-safe routing via go_router_builder
 /// - Custom page transitions
-/// - Navigation debugging and logging
-/// - Adaptive UI patterns
+/// - Unified navigation tracking
+/// - Adaptive navigation patterns
 /// - Dependency injection integration
 ///
 /// ## Core Components
@@ -14,7 +14,16 @@
 /// - `RouteDefinitions`: Centralized route paths and names
 /// - `BaseRoute`: Abstract base for routes with custom transitions
 /// - `PageBuilder`: Interface for custom page transitions
-/// - `AppRouterObserver`: Navigation debugging and logging
+/// - `NavigationTrackingService`: Tracks all navigation events
+/// - `BranchNavigatorObserver`: Tracks in-branch navigation
+///
+/// ## Navigation Tracking
+///
+/// The navigation system uses a unified tracking approach:
+/// - `NavigationTrackingService` listens to GoRouterDelegate for
+///   branch switches
+/// - `BranchNavigatorObserver` forwards in-branch navigation
+/// - All events are emitted to a single stream for logging/analytics
 ///
 /// ## Usage Example
 ///
@@ -48,7 +57,10 @@
 library;
 
 export 'app_router.dart';
-export 'app_router_observer.dart';
 export 'base_route.dart';
+export 'branch_navigator_observer.dart';
+export 'navigation_event.dart';
+export 'navigation_event_type.dart';
+export 'navigation_tracking_service.dart';
 export 'page_builder.dart';
 export 'route_definitions.dart';
