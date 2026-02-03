@@ -19,13 +19,24 @@ import 'package:starter_app/features/settings/l10n/settings_localizations.dart';
 /// This follows Material Design 3 navigation guidelines and integrates
 /// with GoRouter's StatefulNavigationShell for proper state management.
 ///
+/// ## Dependency Injection
+///
+/// This widget follows the Dependency Inversion Principle:
+/// - It declares what it needs (IAppLogger) via required constructor parameter
+/// - It does NOT use `context.read()` in its own build method
+/// - The caller (route builder) injects the dependency from RepositoryProvider
+///
+/// This enables proper testability - tests can pass a mock logger directly
+/// without setting up the full Provider tree.
+///
 /// Example:
 /// ```dart
 /// StatefulShellRoute(
 ///   builder: (context, state, navigationShell) {
 ///     return AdaptiveNavigationScaffold(
 ///       navigationShell: navigationShell,
-///       logger: getIt<AppLogger>(),
+///       // Injected from RepositoryProvider in App widget
+///       logger: context.read<IAppLogger>(),
 ///     );
 ///   },
 ///   branches: [...],
@@ -33,6 +44,10 @@ import 'package:starter_app/features/settings/l10n/settings_localizations.dart';
 /// ```
 final class AdaptiveNavigationScaffold extends StatelessWidget {
   /// Creates an [AdaptiveNavigationScaffold].
+  ///
+  /// [logger] is required and should be injected from RepositoryProvider.
+  /// The widget itself does not resolve the dependency - it follows
+  /// constructor injection pattern for proper testability.
   const AdaptiveNavigationScaffold({
     required this.navigationShell,
     required this.logger,
@@ -42,7 +57,8 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
   /// The navigation shell that manages the tab state and navigation.
   final StatefulNavigationShell navigationShell;
 
-  /// The logger used for navigation events.
+  /// Logger for navigation events.
+  /// Injected via constructor from [RepositoryProvider<IAppLogger>].
   final IAppLogger logger;
 
   /// Get navigation destinations with localized labels.

@@ -208,6 +208,9 @@ final class AppShellRoute extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
+    // Logger is injected from RepositoryProvider in App widget.
+    // The widget declares the dependency, the route builder provides it.
+    // This follows constructor injection pattern - not service locator.
     return AdaptiveNavigationScaffold(
       navigationShell: navigationShell,
       logger: context.read<IAppLogger>(),
