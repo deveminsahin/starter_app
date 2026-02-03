@@ -57,8 +57,9 @@ Future<void> bootstrap<T extends Widget>({
       // Resolve and initialize bootstrap service
       final bootstrapService = onResolve<BootstrapService>();
       await bootstrapService.initialize(environment);
-      bootstrapService..setupErrorHandling()
-      ..setupNavigationLogging();
+      bootstrapService
+        ..setupErrorHandling()
+        ..setupNavigationLogging();
 
       // Run the app
       runApp(onResolve<T>());
