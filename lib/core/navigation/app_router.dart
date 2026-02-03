@@ -130,42 +130,31 @@ class AppRouter {
 /// and maintains state across tab switches.
 /// Each tab has its own navigation stack.
 ///
-/// ## Navigator Observer Architecture
+/// ## Navigation Tracking Architecture
 ///
-/// This app uses a **multi-level observer pattern**
-/// for comprehensive navigation
-/// tracking:
+/// This app uses a **unified tracking approach** via NavigationTrackingService:
 ///
 /// ``` text
-/// ┌─────────────────────────────────────────┐
-/// │  Root Navigator (GoRouter)              │
-/// │  Observer: AppRouterObserver [root]     │
-/// │  Sees: All routes (shell + branches)    │
-/// │                                         │
-/// │  ┌─────────────────────────────────┐    │
-/// │  │  Dashboard Branch Navigator          │    │
-/// │  │  Observer: [Dashboard]               │    │
-/// │  │  Sees: Dashboard branch routes only  │    │
-/// │  └─────────────────────────────────┘    │
-/// │                                         │
-/// │  ┌─────────────────────────────────┐    │
-/// │  │  Profile/Settings Branches...   │    │
-/// │  └─────────────────────────────────┘    │
-/// └─────────────────────────────────────────┘
+/// ┌─────────────────────────────────────────────────────────────┐
+/// │  GoRouterDelegate.addListener()  →  NavigationTrackingService│
+/// │  (captures branch switches)              ↓                   │
+/// │                                    Single event stream        │
+/// │  BranchNavigatorObserver ──────→  for all navigation          │
+/// │  (Dashboard, Profile, Settings)          ↓                   │
+/// │                                  AppNavigationLoggingService  │
+/// └─────────────────────────────────────────────────────────────┘
 /// ```
 ///
-/// **Why multiple observers?**
-/// - Root observer tracks global navigation flow
-/// - Branch observers track tab-specific navigation
-/// - Each observer has its own stack (stackDepth differs between observers)
+/// **How it works:**
+/// - GoRouterDelegate listener detects branch switches (tab changes)
+/// - BranchNavigatorObserver forwards in-branch navigation (pushes)
+/// - All events flow through NavigationTrackingService to a single stream
+/// - AppNavigationLoggingService subscribes and logs with proper formatting
 ///
-/// **Expected log behavior:**
-/// When navigating to `/dashboard`, you'll see TWO push logs:
-/// - `[root] PUSH Dashboard` - Root navigator sees the route
-/// - `[Dashboard] PUSH Dashboard` - Dashboard branch navigator sees the route
-///
-/// This is **expected behavior**, not a bug. Each navigator independently
-/// tracks its own routes for proper back-stack management per tab.
+/// **Single log per navigation:**
+/// ``` text
+/// [Navigation] Navigation: PUSH | {route: profile, previous: dashboard, ...}
+/// ```
 ///
 /// Branch observers are defined in feature route files:
 /// - `features/dashboard/presentation/routes/dashboard_routes.dart`

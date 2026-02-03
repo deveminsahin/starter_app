@@ -8,7 +8,7 @@ This comprehensive navigation system provides:
 
 - ✅ **Type-Safe Routing** via `go_router_builder` code generation
 - ✅ **Custom Page Transitions** (slide forward, fade back)
-- ✅ **Navigation Debugging** with AppRouterObserver
+- ✅ **Navigation Tracking** with unified NavigationTrackingService
 - ✅ **Adaptive Navigation** patterns (bottom nav, rail, drawer)
 - ✅ **Dependency Injection** integration (ready for Step 11)
 - ✅ **Centralized Route Definitions** for maintainability
@@ -135,30 +135,29 @@ final class CustomTransitionPageBuilder implements PageBuilder {
 }
 ```
 
-#### 5. **AppRouterObserver** (`app_router_observer.dart`)
+#### 5. **NavigationTrackingService** (`navigation_tracking_service.dart`)
 
-Navigation debugging and state tracking:
+Unified navigation tracking - single source of truth for all navigation events:
 
 ```dart
-@LazySingleton(as: NavigatorObserver)
-final class AppRouterObserver extends NavigatorObserver {
-  // Logs: 🚦 Navigation: PUSH | Route: home | Previous: settings | Stack depth: 2
+@LazySingleton(as: INavigationTrackingService)
+class NavigationTrackingService implements INavigationTrackingService {
+  // Captures branch switches via GoRouterDelegate
+  // Receives in-branch pushes via BranchNavigatorObserver
   
-  List<Route<dynamic>> get navigationStack => ...;
-  Route<dynamic>? get currentRoute => ...;
+  Stream<NavigationEvent> get events => ...;
+  String? get currentRoute => ...;
   bool get canPop => ...;
-  List<String?> get navigationHistory => ...;
+  List<String> get navigationHistory => ...;
 }
 ```
 
 Console output:
 
 ``` text
-🚦 Navigation: PUSH | Route: product-detail | Previous: home | Stack depth: 2
-🚦 Navigation: POP | Route: product-detail | Previous: home | Stack depth: 1
-🚦 Navigation: REPLACE | Route: settings | Previous: home | Stack depth: 1
-🚦 Navigation: START_GESTURE | Route: settings | Previous: home | Stack depth: 1
-🚦 Navigation: STOP_GESTURE
+[Navigation] Navigation: PUSH | Data: {route: profile, previous: dashboard, stackDepth: 1, path: /profile}
+[Navigation] Navigation: PUSH | Data: {route: auth, previous: profile, stackDepth: 2, path: /auth}
+[Navigation] Navigation: PUSH | Data: {route: dashboard, previous: auth, stackDepth: 1, path: /dashboard}
 ```
 
 #### 6. **AdaptiveNavigationScaffold** (`core/presentation/widgets/adaptive_navigation_scaffold.dart`)
@@ -384,12 +383,12 @@ testWidgets('Navigation works correctly', (tester) async {
 });
 ```
 
-### Mock Navigation Observer
+### Mock Navigation Tracking
 
 ```dart
-final mockObserver = MockAppRouterObserver();
-when(() => mockObserver.canPop).thenReturn(true);
-when(() => mockObserver.currentRoute).thenReturn(mockRoute);
+final mockTrackingService = MockNavigationTrackingService();
+when(() => mockTrackingService.canPop).thenReturn(true);
+when(() => mockTrackingService.currentRoute).thenReturn('profile');
 ```
 
 ## Best Practices
@@ -401,7 +400,7 @@ when(() => mockObserver.currentRoute).thenReturn(mockRoute);
 - Override `buildPage` for shell/tab routes to use `NoTransitionPage`
 - Use type-safe navigation (e.g., `const HomeRoute().go(context)`)
 - Run code generation after route changes
-- Check `AppRouterObserver` logs for debugging
+- Check `NavigationTrackingService` logs for debugging
 - Use route guards for authentication
 - Add route names for analytics
 
@@ -429,11 +428,11 @@ if (context.isMobile) {
 
 Once DI is configured, the router will automatically use:
 
-- Injected `AppRouterObserver` for all navigation logging
+- Injected `NavigationTrackingService` for unified event tracking
 - Injected `PageBuilder` for all route transitions
 - Injected `AppRouter` via the `appRouter` getter
 
-Until then, it uses fallback implementations that work identically.
+Navigation logging is handled by `AppNavigationLoggingService` which subscribes to the tracking service.
 
 ## Migration from String-Based Routes
 
@@ -462,7 +461,10 @@ ProductDetailRoute('123').push(context);
 - `lib/core/navigation/route_definitions.dart` - Centralized paths/names
 - `lib/core/navigation/base_route.dart` - Base route class
 - `lib/core/navigation/page_builder.dart` - Transition builders
-- `lib/core/navigation/app_router_observer.dart` - Navigation debugging
+- `lib/core/navigation/navigation_tracking_service.dart` - Unified event tracking
+- `lib/core/navigation/branch_navigator_observer.dart` - In-branch navigation forwarding
+- `lib/core/navigation/navigation_event.dart` - Event model
+- `lib/core/navigation/navigation_event_type.dart` - Event type enum
 - `lib/core/presentation/widgets/adaptive_navigation_scaffold.dart` - Adaptive shell
 
 ### Feature Route Files (part of app_router.dart)
@@ -487,7 +489,7 @@ ProductDetailRoute('123').push(context);
 
 - [x] Type-safe routes with `go_router_builder` ✅
 - [x] Custom page transitions (slide/fade) ✅
-- [x] Navigation debugging with observer ✅
+- [x] Unified navigation tracking with events stream ✅
 - [x] Adaptive navigation patterns ✅
 - [x] Centralized route definitions ✅
 - [x] DI integration ✅

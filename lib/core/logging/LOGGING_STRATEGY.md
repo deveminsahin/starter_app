@@ -308,30 +308,35 @@ test('logs errors correctly', () {
 
 ---
 
-## Migration from Step 9
+## Navigation Logging
 
-Currently, `AppRouterObserver` logs to console directly:
-
-```dart
-debugPrint('🚦 Navigation: PUSH | Route: $routeName');
-```
-
-After Step 10, it will use `IAppLogger`:
+`AppNavigationLoggingService` subscribes to `NavigationTrackingService` events:
 
 ```dart
-_logger.debug('Navigation: PUSH', data: {
-  'route': routeName,
-  'previous': previousName,
-  'stackDepth': stackDepth,
-});
+@singleton
+class AppNavigationLoggingService {
+  void setup() {
+    _trackingService.events.listen(_logNavigationEvent);
+  }
+
+  void _logNavigationEvent(NavigationEvent event) {
+    _logger.debug(
+      'Navigation: ${event.type.name.toUpperCase()}',
+      data: {'route': event.route, 'previous': event.previousRoute},
+      tag: 'Navigation',
+    );
+  }
+}
 ```
 
-This ensures:
+This architecture ensures:
 
-- ✅ Consistent formatting
-- ✅ Structured data
+- ✅ Single source of truth for navigation events
+- ✅ Consistent formatting via IAppLogger
+- ✅ Structured data with path, stackDepth, fullPath
 - ✅ Routes to Sentry in staging/production
 - ✅ Can be disabled/filtered centrally
+- ✅ Type-safe event types (push, pop, replace, remove)
 
 ---
 
