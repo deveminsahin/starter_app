@@ -41,13 +41,11 @@ void main() {
 
   group('AppRouter', () {
     late MockPageBuilder mockPageBuilder;
-    late MockNavigatorObserver mockObserver;
     late MockAppLogger mockLogger;
     late MockAuthChangeNotifier mockAuthChangeNotifier;
 
     setUp(() async {
       mockPageBuilder = MockPageBuilder();
-      mockObserver = MockNavigatorObserver();
       mockLogger = MockAppLogger();
       mockAuthChangeNotifier = MockAuthChangeNotifier();
       await GetIt.I.reset();
@@ -60,9 +58,8 @@ void main() {
       await GetIt.I.reset();
     });
 
-    test('creates router with observer, page builder, and auth notifier', () {
+    test('creates router with page builder and auth notifier', () {
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -72,7 +69,6 @@ void main() {
 
     test('routerConfig is created successfully', () {
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -80,22 +76,8 @@ void main() {
       expect(appRouter.routerConfig, isA<GoRouter>());
     });
 
-    test('routerConfig includes observer', () {
-      final appRouter = AppRouter(
-        mockObserver,
-        mockPageBuilder,
-        mockAuthChangeNotifier,
-      );
-
-      expect(
-        appRouter.routerConfig.observers,
-        contains(mockObserver),
-      );
-    });
-
     test('errorPageBuilder is configured', () {
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -120,7 +102,6 @@ void main() {
       tester,
     ) async {
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -134,9 +115,6 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(AuthState.empty());
       when(() => mockThemeCubit.state).thenReturn(AppThemeMode.system);
       when(() => mockLocaleCubit.state).thenReturn(AppLocale.en);
-
-      // Need to register AppLogger since some internal widgets/observers might look for it
-      // if they are triggered. Though here we mock observer.
 
       await tester.pumpWidget(
         MultiBlocProvider(
@@ -181,7 +159,6 @@ void main() {
         when(() => mockAuthChangeNotifier.isAuthenticated).thenReturn(false);
 
         final appRouter = AppRouter(
-          mockObserver,
           mockPageBuilder,
           mockAuthChangeNotifier,
         );
@@ -242,7 +219,6 @@ void main() {
       when(() => mockAuthChangeNotifier.isAuthenticated).thenReturn(true);
 
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -316,7 +292,6 @@ void main() {
       tester,
     ) async {
       final appRouter = AppRouter(
-        mockObserver,
         mockPageBuilder,
         mockAuthChangeNotifier,
       );
@@ -443,8 +418,6 @@ void main() {
     });
   });
 }
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockPageBuilder extends Mock implements PageBuilder {}
 

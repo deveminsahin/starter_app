@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +5,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:starter_app/core/di/modules/navigation_module.dart';
 import 'package:starter_app/core/logging/i_app_logger.dart';
 import 'package:starter_app/core/navigation/app_router.dart';
-import 'package:starter_app/core/navigation/app_router_observer.dart';
 import 'package:starter_app/core/navigation/page_builder.dart';
 
 import '../../../helpers/mock_helpers.dart';
@@ -31,14 +29,6 @@ void main() {
       await GetIt.I.reset();
     });
 
-    group('provideAppRouterObserver', () {
-      test('should return AppRouterObserver', () {
-        final observer = module.provideAppRouterObserver();
-        expect(observer, isA<AppRouterObserver>());
-        expect(observer, isA<NavigatorObserver>());
-      });
-    });
-
     group('providePageBuilder', () {
       test('should return CustomTransitionPageBuilder', () {
         final builder = module.providePageBuilder();
@@ -49,13 +39,12 @@ void main() {
 
     group('provideGoRouter', () {
       test('should return GoRouter from AppRouter', () {
-        final observer = AppRouterObserver();
         const pageBuilder = CustomTransitionPageBuilder();
         final mockAuthChangeNotifier = MockAuthChangeNotifier();
 
         when(() => mockAuthChangeNotifier.isAuthenticated).thenReturn(false);
 
-        final router = AppRouter(observer, pageBuilder, mockAuthChangeNotifier);
+        final router = AppRouter(pageBuilder, mockAuthChangeNotifier);
 
         final goRouter = module.provideGoRouter(router);
         expect(goRouter, isA<GoRouter>());

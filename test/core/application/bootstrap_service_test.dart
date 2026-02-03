@@ -3,6 +3,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter_app/core/application/app_error_handling_service.dart';
 import 'package:starter_app/core/application/app_monitoring_service.dart';
+import 'package:starter_app/core/application/app_navigation_logging_service.dart';
 import 'package:starter_app/core/application/application_environment.dart';
 import 'package:starter_app/core/application/bootstrap_service.dart';
 import 'package:starter_app/core/domain/ports/i_certificate_service.dart';
@@ -16,6 +17,9 @@ class MockAppMonitoringService extends Mock implements AppMonitoringService {}
 class MockAppErrorHandlingService extends Mock
     implements AppErrorHandlingService {}
 
+class MockAppNavigationLoggingService extends Mock
+    implements AppNavigationLoggingService {}
+
 class MockCertificateService extends Mock implements ICertificateService {}
 
 void main() {
@@ -24,6 +28,7 @@ void main() {
   late MockBlocObserver mockObserver;
   late MockAppMonitoringService mockMonitoringService;
   late MockAppErrorHandlingService mockErrorHandlingService;
+  late MockAppNavigationLoggingService mockNavigationLoggingService;
   late MockCertificateService mockCertificateService;
 
   setUpAll(() {
@@ -35,6 +40,7 @@ void main() {
     mockObserver = MockBlocObserver();
     mockMonitoringService = MockAppMonitoringService();
     mockErrorHandlingService = MockAppErrorHandlingService();
+    mockNavigationLoggingService = MockAppNavigationLoggingService();
     mockCertificateService = MockCertificateService();
 
     when(
@@ -51,6 +57,7 @@ void main() {
       mockObserver,
       mockMonitoringService,
       mockErrorHandlingService,
+      mockNavigationLoggingService,
       mockCertificateService,
     );
   });
@@ -98,6 +105,14 @@ void main() {
         bootstrapService.setupErrorHandling();
 
         verify(() => mockErrorHandlingService.setup()).called(1);
+      });
+    });
+
+    group('setupNavigationLogging', () {
+      test('delegates to navigation logging service', () {
+        bootstrapService.setupNavigationLogging();
+
+        verify(() => mockNavigationLoggingService.setup()).called(1);
       });
     });
 

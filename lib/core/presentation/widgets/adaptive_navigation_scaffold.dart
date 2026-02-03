@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_app/core/constants/constants.dart';
 import 'package:starter_app/core/l10n/l10n_extensions.dart';
-import 'package:starter_app/core/logging/i_app_logger.dart';
 import 'package:starter_app/core/presentation/responsive/responsive.dart';
 import 'package:starter_app/features/dashboard/l10n/dashboard_localizations.dart';
 import 'package:starter_app/features/profile/l10n/profile_localizations.dart';
@@ -25,7 +24,6 @@ import 'package:starter_app/features/settings/l10n/settings_localizations.dart';
 ///   builder: (context, state, navigationShell) {
 ///     return AdaptiveNavigationScaffold(
 ///       navigationShell: navigationShell,
-///       logger: getIt<AppLogger>(),
 ///     );
 ///   },
 ///   branches: [...],
@@ -35,15 +33,11 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
   /// Creates an [AdaptiveNavigationScaffold].
   const AdaptiveNavigationScaffold({
     required this.navigationShell,
-    required this.logger,
     super.key,
   });
 
   /// The navigation shell that manages the tab state and navigation.
   final StatefulNavigationShell navigationShell;
-
-  /// The logger used for navigation events.
-  final IAppLogger logger;
 
   /// Get navigation destinations with localized labels.
   static List<_NavigationDestination> _getDestinations(BuildContext context) {
@@ -70,25 +64,9 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
   int get _selectedIndex => navigationShell.currentIndex;
 
   /// Handle tab selection using goBranch for proper state management.
-  void _onDestinationSelected(BuildContext context, int index) {
+  void _onDestinationSelected(int index) {
     // Don't navigate if already on the same branch
     if (index == _selectedIndex) return;
-
-    final destinations = _getDestinations(context);
-    final previousTab = destinations[_selectedIndex].label;
-    final newTab = destinations[index].label;
-
-    // Log tab switch at debug level (consistent with other navigation events)
-    logger.debug(
-      'Navigation: TAB_SWITCH (RESTORE)',
-      data: {
-        'from': previousTab,
-        'to': newTab,
-        'fromIndex': _selectedIndex,
-        'toIndex': index,
-      },
-      tag: 'Navigation',
-    );
 
     // Use goBranch to switch tabs while preserving individual stack states
     navigationShell.goBranch(
@@ -106,8 +84,7 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
         if (screenSize == ScreenSize.compact) {
           return _CompactLayout(
             selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) =>
-                _onDestinationSelected(context, index),
+            onDestinationSelected: _onDestinationSelected,
             child: navigationShell,
           );
         }
@@ -116,8 +93,7 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
         if (screenSize == ScreenSize.medium) {
           return _MediumLayout(
             selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) =>
-                _onDestinationSelected(context, index),
+            onDestinationSelected: _onDestinationSelected,
             child: navigationShell,
           );
         }
@@ -126,8 +102,7 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
         if (screenSize == ScreenSize.expanded) {
           return _ExpandedLayout(
             selectedIndex: _selectedIndex,
-            onDestinationSelected: (index) =>
-                _onDestinationSelected(context, index),
+            onDestinationSelected: _onDestinationSelected,
             child: navigationShell,
           );
         }
@@ -135,8 +110,7 @@ final class AdaptiveNavigationScaffold extends StatelessWidget {
         // Large/Extra Large: Permanent NavigationDrawer
         return _LargeLayout(
           selectedIndex: _selectedIndex,
-          onDestinationSelected: (index) =>
-              _onDestinationSelected(context, index),
+          onDestinationSelected: _onDestinationSelected,
           child: navigationShell,
         );
       },

@@ -14,7 +14,7 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           const MethodChannel('plugins.flutter.io/path_provider'),
-          (MethodCall methodCall) async {
+          (methodCall) async {
             if (methodCall.method == 'getTemporaryDirectory') {
               return '/tmp';
             }
@@ -25,7 +25,7 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
           const MethodChannel('plugins.flutter.io/shared_preferences'),
-          (MethodCall methodCall) async {
+          (methodCall) async {
             return <String, dynamic>{};
           },
         );

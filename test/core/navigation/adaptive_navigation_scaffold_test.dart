@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:starter_app/core/logging/i_app_logger.dart';
+
 import 'package:starter_app/core/presentation/widgets/adaptive_navigation_scaffold.dart';
 
-import '../../helpers/mock_helpers.dart';
 import '../../helpers/pump_app.dart';
 
 /// A fake implementation of StatefulNavigationShell for testing.
@@ -59,7 +56,6 @@ class _FakeState extends State<FakeStatefulNavigationShell> {
 
 void main() {
   group('AdaptiveNavigationScaffold', () {
-    late MockAppLogger mockLogger;
     late int capturedBranchIndex;
     late bool goBranchCalled;
 
@@ -73,24 +69,15 @@ void main() {
       );
     }
 
-    setUp(() async {
-      mockLogger = MockAppLogger();
+    setUp(() {
       capturedBranchIndex = -1;
       goBranchCalled = false;
-
-      await GetIt.I.reset();
-      GetIt.I.registerSingleton<IAppLogger>(mockLogger);
-    });
-
-    tearDown(() async {
-      await GetIt.I.reset();
     });
 
     testWidgets('renders without errors', (tester) async {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       expect(find.byType(AdaptiveNavigationScaffold), findsOneWidget);
@@ -108,7 +95,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       expect(find.byType(NavigationBar), findsOneWidget);
@@ -128,7 +114,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       expect(find.byType(NavigationBar), findsNothing);
@@ -148,7 +133,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       expect(find.byType(NavigationBar), findsNothing);
@@ -170,7 +154,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       expect(find.byType(NavigationBar), findsNothing);
@@ -192,7 +175,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Find and tap the second destination (index 1)
@@ -219,7 +201,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Find NavigationRail and select destination
@@ -246,7 +227,6 @@ void main() {
         await tester.pumpApp(
           AdaptiveNavigationScaffold(
             navigationShell: createFakeShell(),
-            logger: mockLogger,
           ),
         );
         // Open the drawer
@@ -285,7 +265,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Find NavigationDrawer
@@ -313,7 +292,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Try to select the same destination (index 0)
@@ -327,37 +305,6 @@ void main() {
       expect(goBranchCalled, isFalse);
     });
 
-    testWidgets('logs tab switch when destination changes', (tester) async {
-      tester.view.physicalSize = const Size(400, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
-
-      await tester.pumpApp(
-        AdaptiveNavigationScaffold(
-          navigationShell: createFakeShell(),
-          logger: mockLogger,
-        ),
-      );
-      // Select a different destination
-      final navigationBar = tester.widget<NavigationBar>(
-        find.byType(NavigationBar),
-      );
-      navigationBar.onDestinationSelected!(1);
-      await tester.pumpAndSettle();
-
-      // Verify logger was called
-      verify(
-        () => mockLogger.debug(
-          'Navigation: TAB_SWITCH (RESTORE)',
-          data: any(named: 'data'),
-          tag: 'Navigation',
-        ),
-      ).called(1);
-    });
-
     testWidgets('renders expanded layout structure', (tester) async {
       tester.view.physicalSize = const Size(1000, 800);
       tester.view.devicePixelRatio = 1.0;
@@ -369,7 +316,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Should render scaffold with AppBar (expanded layout has AppBar)
@@ -388,7 +334,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Verify NavigationRail has destinations
@@ -410,7 +355,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // Large layout should show the app name in the permanent drawer
@@ -430,7 +374,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(),
-          logger: mockLogger,
         ),
       );
       // AppBar should show app name
@@ -459,7 +402,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(currentIndex: 1),
-          logger: mockLogger,
         ),
       );
 
@@ -480,7 +422,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(currentIndex: 2),
-          logger: mockLogger,
         ),
       );
 
@@ -501,7 +442,6 @@ void main() {
       await tester.pumpApp(
         AdaptiveNavigationScaffold(
           navigationShell: createFakeShell(currentIndex: 1),
-          logger: mockLogger,
         ),
       );
 

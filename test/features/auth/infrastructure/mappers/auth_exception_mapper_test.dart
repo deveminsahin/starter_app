@@ -25,7 +25,7 @@ void main() {
 
         expect(result, isA<AuthFailure>());
         (result as AuthFailure).when(
-          unauthorized: (String message, StackTrace? stackTrace) {
+          unauthorized: (message, stackTrace) {
             expect(message, 'Invalid credentials');
           },
           forbidden: (_, _) => fail('Should be unauthorized'),
@@ -45,7 +45,7 @@ void main() {
 
         expect(result, isA<AuthFailure>());
         (result as AuthFailure).when(
-          forbidden: (String message, StackTrace? stackTrace) {
+          forbidden: (message, stackTrace) {
             expect(message, 'Account suspended');
           },
           unauthorized: (_, _) => fail('Should be forbidden'),
@@ -65,7 +65,7 @@ void main() {
 
         expect(result, isA<AuthFailure>());
         (result as AuthFailure).when(
-          notFound: (String message, StackTrace? stackTrace) {
+          notFound: (message, stackTrace) {
             expect(message, 'User not found');
           },
           unauthorized: (_, _) => fail('Should be not found'),
@@ -85,7 +85,7 @@ void main() {
 
         expect(result, isA<AuthFailure>());
         (result as AuthFailure).when(
-          emailAlreadyInUse: (String message, StackTrace? stackTrace) {
+          emailAlreadyInUse: (message, stackTrace) {
             // message is default in the failure if not passed, verify this
             // The mapper calls: const AuthFailure.emailAlreadyInUse()
             // without message from exception?
@@ -111,7 +111,7 @@ void main() {
 
         expect(result, isA<AuthFailure>());
         (result as AuthFailure).when(
-          invalidInput: (String message, StackTrace? stackTrace) {
+          invalidInput: (message, stackTrace) {
             expect(message, 'Invalid request');
           },
           unauthorized: (_, _) => fail('Should be invalidInput'),
@@ -133,7 +133,7 @@ void main() {
 
           expect(result, isA<InfrastructureFailure>());
           (result as InfrastructureFailure).when(
-            server: (String message, int? statusCode, StackTrace? stackTrace) {
+            server: (message, statusCode, stackTrace) {
               expect(message, 'Server error');
               expect(statusCode, HttpStatus.internalServerError);
             },
@@ -156,7 +156,7 @@ void main() {
 
         expect(result, isA<InfrastructureFailure>());
         (result as InfrastructureFailure).when(
-          server: (String message, int? statusCode, StackTrace? stackTrace) {
+          server: (message, statusCode, stackTrace) {
             expect(message, 'Service unavailable');
             expect(statusCode, HttpStatus.serviceUnavailable);
           },
@@ -201,7 +201,7 @@ void main() {
         final result = mapper.mapToFailure(exception);
 
         (result as InfrastructureFailure).when(
-          server: (String message, int? code, StackTrace? stackTrace) {
+          server: (message, code, stackTrace) {
             expect(code, statusCode);
           },
           network: (_, _) => fail('Should be server failure'),
@@ -258,7 +258,7 @@ void main() {
         final result = mapper.mapToFailure(exception);
 
         (result as AuthFailure).when(
-          unauthorized: (String message, StackTrace? stackTrace) {
+          unauthorized: (message, stackTrace) {
             expect(message, 'Invalid email or password');
           },
           forbidden: (_, _) => fail('Should be unauthorized'),
@@ -277,7 +277,7 @@ void main() {
         final result = mapper.mapToFailure(exception);
 
         (result as AuthFailure).when(
-          forbidden: (String message, StackTrace? stackTrace) {
+          forbidden: (message, stackTrace) {
             expect(message, contains('suspended'));
           },
           unauthorized: (_, _) => fail('Should be forbidden'),
@@ -296,7 +296,7 @@ void main() {
         final result = mapper.mapToFailure(exception);
 
         (result as AuthFailure).when(
-          notFound: (String message, StackTrace? stackTrace) {
+          notFound: (message, stackTrace) {
             expect(message, 'Email not registered');
           },
           unauthorized: (_, _) => fail('Should be not found'),

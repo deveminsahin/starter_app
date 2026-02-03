@@ -4,6 +4,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:starter_app/core/application/app_error_handling_service.dart';
 import 'package:starter_app/core/application/app_monitoring_service.dart';
+import 'package:starter_app/core/application/app_navigation_logging_service.dart';
 import 'package:starter_app/core/application/application_environment.dart';
 import 'package:starter_app/core/domain/ports/i_certificate_service.dart';
 
@@ -14,6 +15,7 @@ import 'package:starter_app/core/domain/ports/i_certificate_service.dart';
 /// - State management setup (BlocObserver)
 /// - Monitoring initialization (via [AppMonitoringService])
 /// - Error handling setup (via [AppErrorHandlingService])
+/// - Navigation logging setup (via [AppNavigationLoggingService])
 /// - Security setup (via [ICertificateService])
 @singleton
 class BootstrapService {
@@ -22,6 +24,7 @@ class BootstrapService {
     this._blocObserver,
     this._monitoringService,
     this._errorHandlingService,
+    this._navigationLoggingService,
     this._certificateService,
   );
 
@@ -29,6 +32,7 @@ class BootstrapService {
   final BlocObserver _blocObserver;
   final AppMonitoringService _monitoringService;
   final AppErrorHandlingService _errorHandlingService;
+  final AppNavigationLoggingService _navigationLoggingService;
   final ICertificateService _certificateService;
 
   Future<void> initialize(
@@ -55,6 +59,10 @@ class BootstrapService {
 
   void setupErrorHandling() {
     _errorHandlingService.setup();
+  }
+
+  void setupNavigationLogging() {
+    _navigationLoggingService.setup();
   }
 
   void logZoneError(Object error, StackTrace stack) {

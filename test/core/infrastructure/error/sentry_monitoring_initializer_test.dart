@@ -43,7 +43,7 @@ void main() {
           TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
               .setMockMethodCallHandler(
                 const MethodChannel('sentry_flutter'),
-                (MethodCall methodCall) async {
+                (methodCall) async {
                   log.add(methodCall);
                   return null;
                 },
@@ -75,7 +75,7 @@ void main() {
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
             .setMockMethodCallHandler(
               const MethodChannel('sentry_flutter'),
-              (MethodCall methodCall) async => null,
+              (methodCall) async => null,
             );
 
         final result = await initializer.initialize(

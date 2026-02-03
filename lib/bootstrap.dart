@@ -16,6 +16,7 @@ import 'package:url_strategy/url_strategy.dart';
 /// - BlocObserver for state change logging
 /// - Sentry for error tracking (staging/production only)
 /// - Global error handling (Flutter, Platform, and Zone errors)
+/// - Navigation event logging
 /// - Web-specific configurations (URL strategy)
 ///
 /// Initializes and runs the app with all dependencies.
@@ -56,14 +57,15 @@ Future<void> bootstrap<T extends Widget>({
       // Resolve and initialize bootstrap service
       final bootstrapService = onResolve<BootstrapService>();
       await bootstrapService.initialize(environment);
-      bootstrapService.setupErrorHandling();
+      bootstrapService..setupErrorHandling()
+      ..setupNavigationLogging();
 
       // Run the app
       runApp(onResolve<T>());
     },
     // Catch async errors that escape Flutter's error handling
     // (e.g., errors in Future callbacks, Timer, Stream)
-    (Object error, StackTrace stack) {
+    (error, stack) {
       try {
         // Attempt to resolve BootstrapService to log the error
         onResolve<BootstrapService>().logZoneError(error, stack);

@@ -66,7 +66,7 @@ class MockChain extends Mock implements Chain<dynamic> {}
 
 class MockAuthApiService extends Mock implements AuthApiService {}
 
-final class MockChopperClient extends ChopperClient with Mock {
+final class MockChopperClient extends ChopperClient implements Mock {
   MockChopperClient() : super(baseUrl: Uri.parse('http://test.com'));
 }
 
