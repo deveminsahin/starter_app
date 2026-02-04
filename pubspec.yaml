@@ -29,7 +29,7 @@ dependencies:
   logging: ^1.3.0
   meta: ^1.16.0
   path_provider: ^2.1.5
-  sentry_flutter: ^9.9.2
+  sentry_flutter: ^9.11.0
   shared_preferences: ^2.5.4
   synchronized: ^3.4.0
   url_strategy: ^0.3.0
