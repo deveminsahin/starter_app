@@ -41,7 +41,7 @@ dev_dependencies:
   bloc_lint: ^0.3.5
   bloc_test: ^10.0.0
   build_runner: ^2.10.4
-  chopper_generator: ^8.5.0
+  chopper_generator: ^8.6.0
   flutter_test:
     sdk: flutter
   freezed: ^3.2.3
