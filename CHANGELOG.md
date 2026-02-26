@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Social media launch templates in `social/`
 
 ### Changed
-- Updated Flutter SDK to 3.38.9
-- Updated Dart SDK to 3.10.8
+- Updated Flutter SDK to 3.41.2
+- Updated Dart SDK to 3.11.0
 - Replaced iOS launch screen with default Flutter template
 - Updated macOS entitlements for keychain access
 - Test count increased to 2,282 tests

@@ -101,7 +101,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.9'
+          flutter-version: '3.41.2'
       
       - run: very_good packages get
       - run: dart run build_runner build --delete-conflicting-outputs

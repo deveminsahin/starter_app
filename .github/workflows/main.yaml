@@ -24,7 +24,7 @@ jobs:
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
-      flutter_version: "3.38.9"
+      flutter_version: "3.41.2"
       coverage_excludes: "**/*.freezed.dart **/*.g.dart **/l10n/*.dart **/generated/*.dart"
 
   spell-check:
@@ -45,7 +45,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.38.9"
+          flutter-version: "3.41.2"
           channel: stable
           cache: true
       
