@@ -4,8 +4,8 @@
 [![CI](https://github.com/deveminsahin/starter_app/actions/workflows/main.yaml/badge.svg)](https://github.com/deveminsahin/starter_app/actions/workflows/main.yaml)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
-[![Flutter](https://img.shields.io/badge/Flutter-3.38+-blue.svg)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.10+-blue.svg)](https://dart.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.41.2-blue.svg)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.11.0-blue.svg)](https://dart.dev)
 
 An **AI-ready**, enterprise-grade Flutter starter app built with **Clean Architecture**, **Domain-Driven Design (DDD)**, **Hexagonal Architecture**, and **100% test coverage**.
 
@@ -101,8 +101,8 @@ This project follows **Hexagonal Architecture** (Ports & Adapters) with **DDD ta
 
 ### Prerequisites
 
-- Flutter 3.38+ (stable)
-- Dart 3.10+
+- Flutter 3.41.2 (stable)
+- Dart 3.11.0
 - [Very Good CLI](https://pub.dev/packages/very_good_cli): `dart pub global activate very_good_cli`
 
 ### Quick Start

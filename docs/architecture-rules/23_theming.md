@@ -38,7 +38,7 @@ lib/core/presentation/bloc/  → State Management
 ### Accessing Theme
 
 ```dart
-// ✅ Flutter 3.38+ - Use static .of() constructors
+// ✅ Use static .of() constructors
 final textTheme = TextTheme.of(context);
 final colorScheme = ColorScheme.of(context);
 
