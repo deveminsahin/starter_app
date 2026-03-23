@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   bloc_concurrency: ^0.3.0
-  chopper: ^8.5.0
+  chopper: ^8.5.1
   flex_color_scheme: ^8.4.0
   flutter:
     sdk: flutter
