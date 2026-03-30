@@ -65,7 +65,7 @@ jobs:
           min_coverage: 100
       
       - name: Update coverage badge
-        uses: schneegans/dynamic-badges-action@v1.7.0
+        uses: schneegans/dynamic-badges-action@v1.8.0
         with:
           auth: ${{ secrets.GIST_TOKEN }}
           gistID: fe81c0405c3ee75b70c1f6b07996d74a
